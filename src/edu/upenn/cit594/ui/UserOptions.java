@@ -24,6 +24,7 @@ public class UserOptions {
 		
 		Scanner scanner = new Scanner(System.in);
 		int selectedOption = scanner.nextInt();
+		scanner.close();
 		return selectedOption;
 	}
 	
@@ -31,7 +32,14 @@ public class UserOptions {
 	 * Select the method corresponding the selection
 	 * passing necessary files for each
 	 */
-	
+	public static int getZipCode() {
+		System.out.println("Please pick a zipcode");
+		Scanner scanner = new Scanner(System.in);
+		int zip = 0;
+		zip = scanner.nextInt();
+		scanner.close();
+		return zip;
+	}
 	/*
 	 * @Cayde
 	 * below method probably better in processor package

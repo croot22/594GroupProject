@@ -8,6 +8,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import edu.upenn.cit594.datamanagement.ReadPopulationFile;
 import edu.upenn.cit594.datamanagement.ReadProperties;
+import edu.upenn.cit594.ui.UserOptions;
 
 public class Questions {
 	
@@ -60,8 +61,7 @@ public class Questions {
 		for (Integer zipCode : fines.keySet()) {
 			
 			/*
-			 * @Cayde
-			 * checking the fines_per_capita hashmap for already having solution
+			 * checking the finesPerCapita hashmap for already having solution
 			 */
 			
 			if ((fines.get(zipCode) != null) && populations.get(zipCode) != null) {
@@ -86,10 +86,7 @@ public class Questions {
 	 * to decrease repetition
 	 */
 	public void q3AverageMarketValue(String propertiesFileName) {
-		System.out.println("Please pick a zipcode");
-		Scanner i = new Scanner(System.in);
-		int zip = 0;
-		zip = i.nextInt();;
+		int zip = UserOptions.getZipCode();
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();  //all the market values for a zip code
 		if (marketValues.containsKey(zip) == false) {
 			ReadProperties readProperties = new ReadProperties();
@@ -97,7 +94,7 @@ public class Questions {
 			marketValues.put(zip, marketValueList);  			//Memoize if not already stored
 		}	
 		if (totalMarketValues.containsKey(zip) == false) {   	//@Cayde this may be unnecessary step or previous may be
-			double totalMarketValue = 0; 						//@Cayde probably could be double
+			double totalMarketValue = 0; 						
 			for (int marketValue: marketValues.get(zip)) {
 				totalMarketValue += marketValue;
 			}
@@ -112,10 +109,7 @@ public class Questions {
 	}
 	
 	public void q4AverageLivableArea(String propertiesFileName) {
-		System.out.println("Please pick a zipcode");
-		Scanner scanner = new Scanner(System.in);							//@Cayde use strategy design pattern to decrease repetition
-		int zip = 0;
-		zip = scanner.nextInt();
+		int zip = UserOptions.getZipCode();
 		ArrayList<Integer> livableAreaList = new ArrayList<Integer>();
 		if (livableAreas.containsKey(zip) == false) {
 			ReadProperties rp = new ReadProperties();
@@ -139,10 +133,7 @@ public class Questions {
 	
 	public void q5TotalMarketValuePerCapita(String propertiesFileName, String populationFileName) {
 		System.out.println("Please pick a zipcode");
-		Scanner scanner = new Scanner(System.in);
-		int zip = 0;
-		zip = scanner.nextInt();
-		//i.close();
+		int zip = UserOptions.getZipCode();
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();
 		if (marketPerCapitas.containsKey(zip) == false) {
 			if (totalMarketValues.containsKey(zip) == false) {
@@ -169,11 +160,8 @@ public class Questions {
 	}
 	
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, String propertiesFileName, 
-			String populationFileName, String parkingFileName) {
-		System.out.println("Please pick a zipcode");
-		Scanner scanner = new Scanner(System.in);
-		int zip = 0;
-		zip = scanner.nextInt();
+		String populationFileName, String parkingFileName) {
+		int zip = UserOptions.getZipCode();
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();
 		if (marketPerFinePerCapitas.containsKey(zip) == false) {
 			if (totalMarketValues.containsKey(zip) == false) {
