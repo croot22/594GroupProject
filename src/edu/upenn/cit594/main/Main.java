@@ -30,22 +30,17 @@ public class Main {
 		Main.populationFileName = args[3];
 		Main.logFileName = args[4];
 		
-		
 		/*
-		 * @Cayde need singleton design pattern for logging
-		 * need timestamps
+		 * log current time at start of program
 		 */
-		
 		Logging logger = Logging.getInstance();
+
+		String currentTime = logger.getCurrentTime();
+		logger.log(currentTime);
+		
 		
 		/*
 		 * Start cycle of user options
-		 */
-		
-		
-		/*
-		 * @Cayde consider whether best style
-		 * 
 		 */
 		
 		UserInterface ui = new UserInterface();
