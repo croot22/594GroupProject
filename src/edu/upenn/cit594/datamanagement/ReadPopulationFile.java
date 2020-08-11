@@ -5,10 +5,13 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import edu.upenn.cit594.logging.Logging;
+import edu.upenn.cit594.main.Main;
+
 public class ReadPopulationFile {
 
-	public HashMap<Integer, Integer> readPopulationFile(String populationfilename) {
-		File populationList = new File(populationfilename);
+	public HashMap<Integer, Integer> readPopulationFile(String populationFileName) {
+		File populationList = new File(populationFileName);
 		Scanner scanner;
 		HashMap<Integer, Integer> populations = new HashMap<Integer, Integer>();
 		try {
@@ -25,6 +28,12 @@ public class ReadPopulationFile {
 			System.out.println("Error text file does not exist or can not be read");
 			System.exit(0);
 		}
+		
+		
+		Logging logger = Logging.getInstance();
+		String currentTime = logger.getCurrentTime();
+		String logMessage = currentTime +" "+ populationFileName;
+		logger.log(logMessage);
 		
 		String nextline;
 		

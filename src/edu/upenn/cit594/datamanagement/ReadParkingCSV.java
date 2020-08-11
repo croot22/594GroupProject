@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import edu.upenn.cit594.logging.Logging;
+
 
 public class ReadParkingCSV {
 
@@ -39,7 +41,11 @@ public class ReadParkingCSV {
 				System.out.println("Error text file does not exist or can not be read");
 				System.exit(0);
 			}
-
+			
+			Logging logger = Logging.getInstance();
+			String currentTime = logger.getCurrentTime();
+			String logMessage = currentTime +" "+ parkingFileName;
+			logger.log(logMessage);
 
 			while(scanner.hasNextLine()) {   //populates the array
 				nextLine = scanner.nextLine();  //scan through each line

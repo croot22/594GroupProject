@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import edu.upenn.cit594.logging.Logging;
+
 public class ReadProperties {
 	
 	public ArrayList<Integer> readProperties(int selectedOption, String propertiesFileName, int zipCode) {
@@ -21,6 +23,11 @@ public class ReadProperties {
 			System.out.println("Error text file does not exist or can not be read");
 			System.exit(0);
 		}
+		
+		Logging logger = Logging.getInstance();
+		String currentTime = logger.getCurrentTime();
+		String logMessage = currentTime +" "+ propertiesFileName;
+		logger.log(logMessage);
 		
 		/*
 		 * File readers that improve efficiency

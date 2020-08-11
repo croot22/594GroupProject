@@ -12,6 +12,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import edu.upenn.cit594.logging.Logging;
+
 
 public class ReadParkingJson {
 	
@@ -34,6 +36,10 @@ public class ReadParkingJson {
 			System.exit(0);
 		}
 		
+		Logging logger = Logging.getInstance();
+		String currentTime = logger.getCurrentTime();
+		String logMessage = currentTime +" "+ parkingFileName;
+		logger.log(logMessage);
 		
 		// create a parser
 		JSONParser parser = new JSONParser();
