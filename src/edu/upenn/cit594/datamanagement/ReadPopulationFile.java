@@ -8,11 +8,11 @@ import java.util.Scanner;
 public class ReadPopulationFile {
 
 	public HashMap<Integer, Integer> readPopulationFile(String populationfilename) {
-		File populationlist = new File(populationfilename);
-		Scanner i;
+		File populationList = new File(populationfilename);
+		Scanner scanner;
 		HashMap<Integer, Integer> populations = new HashMap<Integer, Integer>();
 		try {
-			i = new Scanner(populationlist);
+			scanner = new Scanner(populationList);
 		} catch (FileNotFoundException e) {
 			return populations;
 			}  
@@ -21,7 +21,7 @@ public class ReadPopulationFile {
 		 * If text file does not exist or can not be read
 		 */
 		
-		if ((populationlist.canRead()) && (populationlist.exists()) == false) {
+		if ((populationList.canRead()) && (populationList.exists()) == false) {
 			System.out.println("Error text file does not exist or can not be read");
 			System.exit(0);
 		}
@@ -32,22 +32,22 @@ public class ReadPopulationFile {
 		 * Create population list
 		 */
 		
-		while(i.hasNextLine()) {  
-			nextline = i.nextLine();  
-			String datavalue[] = nextline.split(" ");
-			if (datavalue[1] != null) {
-				int zipcode = Integer.parseInt(datavalue[0]); 			     
-			    int population = Integer.parseInt(datavalue[1]);
-				if (populations.containsKey(zipcode)) {							//@Cayde this sum totaling probably should be moved to processor
-					int totalpopulation = populations.get(zipcode) + population;
-					populations.put(zipcode, totalpopulation);
+		while(scanner.hasNextLine()) {  
+			nextline = scanner.nextLine();  
+			String dataValue[] = nextline.split(" ");
+			if (dataValue[1] != null) {
+				int zipCode = Integer.parseInt(dataValue[0]); 			     
+			    int population = Integer.parseInt(dataValue[1]);
+				if (populations.containsKey(zipCode)) {							//@Cayde this sum totaling probably should be moved to processor
+					int totalpopulation = populations.get(zipCode) + population;
+					populations.put(zipCode, totalpopulation);
 				}
 				else {
-					populations.put(zipcode, population);
+					populations.put(zipCode, population);
 				}	
 			}
 		}	
-		i.close();
+		scanner.close();
 		return populations;
 	}
 	
