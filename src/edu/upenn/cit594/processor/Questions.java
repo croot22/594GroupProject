@@ -85,8 +85,8 @@ public class Questions {
 	 * Use strategy design pattern and/or separate methods
 	 * to decrease repetition
 	 */
-	public void q3AverageMarketValue(String propertiesFileName) {
-		int zip = UserInterface.getZipCode();
+	public void q3AverageMarketValue(String propertiesFileName, int zip) {
+		
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();  //all the market values for a zip code
 		if (marketValues.containsKey(zip) == false) {
 			ReadProperties readProperties = new ReadProperties();
@@ -108,8 +108,8 @@ public class Questions {
 		System.out.println("Average Market value for " + zip + " is " + Math.round(averageMarketValues.get(zip)));
 	}
 	
-	public void q4AverageLivableArea(String propertiesFileName) {
-		int zip = UserInterface.getZipCode();
+	public void q4AverageLivableArea(String propertiesFileName, int zip) {
+
 		ArrayList<Integer> livableAreaList = new ArrayList<Integer>();
 		if (livableAreas.containsKey(zip) == false) {
 			ReadProperties rp = new ReadProperties();
@@ -131,9 +131,9 @@ public class Questions {
 		System.out.println("Average livable area for " + zip + " is " + Math.round(averageLivableAreas.get(zip)));
 	}
 	
-	public void q5TotalMarketValuePerCapita(String propertiesFileName, String populationFileName) {
-		System.out.println("Please pick a zipcode");
-		int zip = UserInterface.getZipCode();
+	public void q5TotalMarketValuePerCapita(String propertiesFileName, 
+			String populationFileName, int zip) {
+		
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();
 		if (marketPerCapitas.containsKey(zip) == false) {
 			if (totalMarketValues.containsKey(zip) == false) {
@@ -160,8 +160,8 @@ public class Questions {
 	}
 	
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, String propertiesFileName, 
-		String populationFileName, String parkingFileName) {
-		int zip = UserInterface.getZipCode();
+		String populationFileName, String parkingFileName, int zip) {
+
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();
 		if (marketPerFinePerCapitas.containsKey(zip) == false) {
 			if (totalMarketValues.containsKey(zip) == false) {
