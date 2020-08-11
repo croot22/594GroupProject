@@ -8,6 +8,10 @@ import edu.upenn.cit594.ui.UserInterface;
 public class Main {
 
 	public static String logFileName;
+	public static String fileType;
+	public static String parkingFileName;
+	public static String propertiesFileName;	
+	public static String populationFileName;
 	
 	public static void main(String args[]) throws IOException {
 
@@ -20,10 +24,10 @@ public class Main {
 		 * Store arguments
 		 */
 		
-		String fileType = args[0];
-		String parkingFileName = args[1];
-		String propertiesFileName = args[2];	
-		String populationFileName = args[3];
+		Main.fileType = args[0];
+		Main.parkingFileName = args[1];
+		Main.propertiesFileName = args[2];	
+		Main.populationFileName = args[3];
 		Main.logFileName = args[4];
 		
 		

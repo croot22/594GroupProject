@@ -7,14 +7,14 @@ import edu.upenn.cit594.processor.Questions;
 public class UserInterface {
 
 	protected Scanner scanner;
-	
-	
-	public int start() {
-		
+
+
+	public void start() {
+
 		/*
 		 * Initial screen
 		 */
-		
+
 		System.out.println("Would you like to play a game?");
 		System.out.println("0: Exit");
 		System.out.println("1: Total Population for all zipcodes");
@@ -23,22 +23,43 @@ public class UserInterface {
 		System.out.println("4: Average total livable area for a specified zipcode");
 		System.out.println("5: Average total residential market value per capita for a specified zipcode");
 		System.out.println("6: Custom! Ratio of average total residential market value per capita to average fine per capita");
-		
+
 		scanner = new Scanner(System.in);
 		int selectedOption = -1;
 		try {
-		selectedOption = scanner.nextInt();
-		while (selectedOption > 6 || selectedOption < 0) {
-			System.out.println("Please input a number corresponding to one of the options.");
 			selectedOption = scanner.nextInt();
-		}
+			while (selectedOption > 6 || selectedOption < 0) {
+				System.out.println("Please input a number corresponding to one of the options.");
+				selectedOption = scanner.nextInt();
+			}
 		} catch(InputMismatchException e) {
 			System.out.println("Please input a number corresponding to one of the options.");
 		}
 		scanner.close();
-		return selectedOption;
+
+		if(selectedOption == 0) {
+			System.exit(0);
+		}
+		else if (selectedOption == 1) {
+			question.q1TotalPopulation(populationFileName);
+		}
+		else if (selectedOption == 2) {
+			
+		}
+		else if (selectedOption == 3) {
+			
+		}
+		else if (selectedOption == 4) {
+			
+		}
+		else if(selectedOption == 5) {
+			
+		}
+		else {
+			
+		}
 	}
-	
+
 	/*
 	 * Select the method corresponding the selection
 	 * passing necessary files for each
@@ -55,7 +76,7 @@ public class UserInterface {
 	 * @Cayde
 	 * below method probably better in processor package
 	 */
-	
+
 	public void followOption(int selectedOption, String parkingFileType, String parkingFileName, 
 			String propertiesFileName, String populationFileName){
 		Questions question = new Questions();
@@ -82,15 +103,15 @@ public class UserInterface {
 		else if (selectedOption == 6) {
 			question.q6TotalMarketValuePerTotalFinesPerCapita(parkingFileType, propertiesFileName, populationFileName, parkingFileName);
 		}
-		
+
 		/*
 		 * Restart cycle
 		 */
-		
+
 		selectedOption = start();
 		followOption(selectedOption, parkingFileType, parkingFileName, propertiesFileName, populationFileName);
-		
+
 	}
-	
-	
+
+
 }
