@@ -12,24 +12,26 @@ public class Logging {
 	 * Set up singleton design of logfile
 	 */
 	
-	public static String filename;
+
 	private PrintWriter out;
 	
 	/*
 	 * 1. Private Constructor
 	 */
 	
-	private Logging(String filename) {
+	private Logging(String fileName) {
 		try {
-			out = new PrintWriter(new File(filename));
-		} catch (Exception e) { }
+			out = new PrintWriter(new File(fileName));
+		} catch (Exception e) { 
+			
+		}
 	} 
 	
 	/*
 	 * 2. Singleton instance with parameter of file name in main
 	 */
 	
-	private static Logging instance = new Logging(filename);
+	private static Logging instance = new Logging(fileName);
 	
 	/*
 	 * 3. Singleton accessor method
@@ -43,10 +45,9 @@ public class Logging {
 	 * Method for writing to logfile
 	 */
 	
-	public void logFile() throws IOException {
-		FileWriter fileWriter = new FileWriter(filename);
-	    PrintWriter printWriter = new PrintWriter(fileWriter);
-		printWriter.close();
+	public void log(String msg) {
+		out.println(msg);
+		out.flush();
 	}
 }
 

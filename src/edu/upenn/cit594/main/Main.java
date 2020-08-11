@@ -7,6 +7,7 @@ import edu.upenn.cit594.ui.UserOptions;
 
 public class Main {
 
+	public static String logFileName;
 	public static void main(String args[]) throws IOException {
 
 		if (args.length != 5) {
@@ -22,7 +23,7 @@ public class Main {
 		String parkingfilename = args[1];
 		String propertiesfilename = args[2];	
 		String populationfilename = args[3];
-		String logfile = args[4];
+		Main.logFileName = args[4];
 		
 		/*
 		 * Start cycle of user options
