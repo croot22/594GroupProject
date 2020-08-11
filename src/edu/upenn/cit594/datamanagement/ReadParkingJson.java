@@ -15,21 +15,21 @@ import org.json.simple.parser.ParseException;
 
 public class ReadParkingJson {
 	
-	public String parkingfilename;
+	public String parkingFileName;
 	
-	public ReadParkingJson(String parkingfilename) {
-		this.parkingfilename = parkingfilename;
+	public ReadParkingJson(String parkingFileName) {
+		this.parkingFileName = parkingFileName;
 	}
 	
 	public TreeMap<Integer, Integer> readJsonFile() {
 		TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>();
-		File parkinglist = new File(parkingfilename);
+		File parkingList = new File(parkingFileName);
 		
 		/*
 		 * If JSON file does not exist or can't be read
 		 */
 		
-		if ((parkinglist.canRead()) && (parkinglist.exists()) == false) {
+		if ((parkingList.canRead()) && (parkingList.exists()) == false) {
 			System.out.println("Error JSON file does not exist or can not be read");
 			System.exit(0);
 		}
@@ -40,7 +40,7 @@ public class ReadParkingJson {
 		// open the file and get the array of JSON objects
 		JSONArray objects = null;
 		try {
-			objects = (JSONArray)parser.parse(new FileReader(parkingfilename));
+			objects = (JSONArray)parser.parse(new FileReader(parkingFileName));
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -51,17 +51,17 @@ public class ReadParkingJson {
 		while (iter.hasNext()) {
 		// get the next JSON object
 			JSONObject object = (JSONObject) iter.next();
-			String stringzipcode = (String) object.get("zip_code");
-			if (stringzipcode.equals("") == false)  {
-				long longfine = (long) object.get("fine");
-				int fine = (int) longfine;    
-				int zipcode = Integer.parseInt(stringzipcode);
-				if (fines.containsKey(zipcode)) {       //@Cayde should this be in processor?
-					int totalfine = fines.get(zipcode) + fine;
-					fines.put(zipcode, totalfine);
+			String stringZipCode = (String) object.get("zip_code");
+			if (stringZipCode.equals("") == false)  {
+				long longFine = (long) object.get("fine");
+				int fine = (int) longFine;    
+				int zipCode = Integer.parseInt(stringZipCode);
+				if (fines.containsKey(zipCode)) {       //@Cayde should this be in processor?
+					int totalfine = fines.get(zipCode) + fine;
+					fines.put(zipCode, totalfine);
 				}
 				else {
-					fines.put(zipcode, fine);
+					fines.put(zipCode, fine);
 				}	
 			} 
 		}
