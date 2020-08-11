@@ -16,12 +16,12 @@ public class FileDecision {
 		
 		TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>(); 
 		if (filetype.equals("csv")) {
-			ReadParkingCSV rcf = new ReadParkingCSV(parkingfilename);
-			fines = rcf.readCsvFile();
+			ReadParkingCSV parkingFile = new ReadParkingCSV(parkingfilename);
+			fines = parkingFile.readCsvFile();
 		}
 		else if (filetype.equals("json")) {
-			ReadParkingJson rjf = new ReadParkingJson(parkingfilename);
-			fines = rjf.readJsonFile();
+			ReadParkingJson parkingFile = new ReadParkingJson(parkingfilename);
+			fines = parkingFile.readJsonFile();
 		}
 		
 		/*
@@ -29,7 +29,7 @@ public class FileDecision {
 		 */	
 		
 		else {
-			System.out.println("Error not text or json file");
+			System.out.println("Error, not text or json file");
 			System.exit(0);
 		}
 		return fines;
