@@ -10,13 +10,13 @@ import java.util.HashMap;
 
 public class ReadProperties {
 	
-	public ArrayList<Integer> readProperties(int selected_option, String propertiesfilename, int zipcode) throws IOException {
+	public ArrayList<Integer> readProperties(int selectedOption, String propertiesFileName, int zipCode) throws IOException {
 		
 		/*
 		 * If file does not exist or can not be read
 		 */
-		File checkfile = new File(propertiesfilename);
-		if ((checkfile.canRead()) && (checkfile.exists()) == false) {
+		File checkFile = new File(propertiesFileName);
+		if ((checkFile.canRead()) && (checkFile.exists()) == false) {
 			System.out.println("Error text file does not exist or can not be read");
 			System.exit(0);
 		}
@@ -25,38 +25,38 @@ public class ReadProperties {
 		 * File readers that improve efficiency
 		 */
 
-		FileInputStream fileInputStream = new FileInputStream(propertiesfilename);
-		BufferedReader i = new BufferedReader(new InputStreamReader(fileInputStream));
+		FileInputStream fileInputStream = new FileInputStream(propertiesFileName);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
 		
 		//@Cayde try/catch probably better here
 		
 		
-		String firstlinerow = " ";
-		firstlinerow = i.readLine();
-		String nextline;
-		String firstline[] = firstlinerow.split(",");
-		int zip_code_column = 0, livable_area_column = 0, market_value_column = 0;
+		String firstLineRow = " ";
+		firstLineRow = reader.readLine();
+		String nextLine;
+		String firstLine[] = firstLineRow.split(",");
+		int zipCodeColumn = 0, livableAreaColumn = 0, marketValueColumn = 0;
 		
 		/*
 		 * Identify columns with relevant variables
 		 */
 		
-		for (int j = 0; j < firstline.length; j++) {
-			if (firstline[j].equals("zip_code")) {
-				zip_code_column = j;
+		for (int j = 0; j < firstLine.length; j++) {
+			if (firstLine[j].equals("zip_code")) {
+				zipCodeColumn = j;
 			}
-			else if (firstline[j].equals("total_livable_area")) {
-				livable_area_column = j;
+			else if (firstLine[j].equals("total_livable_area")) {
+				livableAreaColumn = j;
 			}
-			else if (firstline[j].equals("market_value")) {
-				market_value_column = j;
+			else if (firstLine[j].equals("market_value")) {
+				marketValueColumn = j;
 			}
 		}
-		int livable_area = 0, market_value = 0;
-		ArrayList<Integer> market_values = new ArrayList<Integer>();
-		ArrayList<Integer> livable_areas = new ArrayList<Integer>();
-		HashMap<Integer, ArrayList<Integer>> all_market_values = new HashMap<Integer, ArrayList<Integer>>();
-		HashMap<Integer, ArrayList<Integer>> all_livable_areas = new HashMap<Integer, ArrayList<Integer>>();
+		int livableArea = 0, marketValue = 0;
+		ArrayList<Integer> marketValues = new ArrayList<Integer>();
+		ArrayList<Integer> livableAreas = new ArrayList<Integer>();
+		HashMap<Integer, ArrayList<Integer>> allMarketValues = new HashMap<Integer, ArrayList<Integer>>();
+		HashMap<Integer, ArrayList<Integer>> allLivableAreas = new HashMap<Integer, ArrayList<Integer>>();
 		
 		/*
 		 * If Option 4, store relevant livable areas for separate processing
@@ -68,45 +68,45 @@ public class ReadProperties {
 		 * probably better in the strategy design pattern
 		 */
 		
-		if (selected_option == 4) {
-			while((nextline = i.readLine()) != null) {  
-				String[] line = nextline.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
+		if (selectedOption == 4) {
+			while((nextLine = reader.readLine()) != null) {  
+				String[] line = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
 		
 		/*
 		 * First checks zipcode has 5 characters before getting substring
 		 * and compares substring to inputted zipcode		
 		 */
 				
-				if ((line[zip_code_column].length() > 5) && 
-					((int) Double.parseDouble (line[zip_code_column].substring(0,5)) == zipcode)) {
-					if (isNumeric(line[livable_area_column])) {
-						livable_area = (int) Double.parseDouble(line[livable_area_column]);
-						livable_areas.add(livable_area);
+				if ((line[zipCodeColumn].length() > 5) && 
+					((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
+					if (isNumeric(line[livableAreaColumn])) {
+						livableArea = (int) Double.parseDouble(line[livableAreaColumn]);
+						livableAreas.add(livableArea);
 					}
 				} 
 			} 
-			return livable_areas;
+			return livableAreas;
 		}
 		
 		/*
 		 * If Option 3,5,or 6 store relevant market values for separate processing
 		 */
 		
-		else if ((selected_option == 3) || (selected_option == 5) || (selected_option == 6)) {
-			while((nextline = i.readLine()) != null) {  
-				String[] line = nextline.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
-				if ((line[zip_code_column].length() > 5) && 
-					((int) Double.parseDouble (line[zip_code_column].substring(0,5)) == zipcode)) {
-					if (isNumeric(line[market_value_column])) {
-						market_value = (int) Double.parseDouble(line[market_value_column]);
-						market_values.add(market_value);
+		else if ((selectedOption == 3) || (selectedOption == 5) || (selectedOption == 6)) {
+			while((nextLine = reader.readLine()) != null) {  
+				String[] line = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
+				if ((line[zipCodeColumn].length() > 5) && 
+					((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
+					if (isNumeric(line[marketValueColumn])) {
+						marketValue = (int) Double.parseDouble(line[marketValueColumn]);
+						marketValues.add(marketValue);
 					}
 				}
 			}
-			return market_values;
+			return marketValues;
 		}	
-		i.close();
-		return market_values;
+		reader.close();
+		return marketValues;
 	}
 	
 	/*
