@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.TreeMap;
 import edu.upenn.cit594.datamanagement.ReadPopulationFile;
 import edu.upenn.cit594.datamanagement.ReadProperties;
-import edu.upenn.cit594.ui.UserOptions;
+import edu.upenn.cit594.ui.UserInterface;
 
 public class Questions {
 	
@@ -86,7 +86,7 @@ public class Questions {
 	 * to decrease repetition
 	 */
 	public void q3AverageMarketValue(String propertiesFileName) {
-		int zip = UserOptions.getZipCode();
+		int zip = UserInterface.getZipCode();
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();  //all the market values for a zip code
 		if (marketValues.containsKey(zip) == false) {
 			ReadProperties readProperties = new ReadProperties();
@@ -109,7 +109,7 @@ public class Questions {
 	}
 	
 	public void q4AverageLivableArea(String propertiesFileName) {
-		int zip = UserOptions.getZipCode();
+		int zip = UserInterface.getZipCode();
 		ArrayList<Integer> livableAreaList = new ArrayList<Integer>();
 		if (livableAreas.containsKey(zip) == false) {
 			ReadProperties rp = new ReadProperties();
@@ -133,7 +133,7 @@ public class Questions {
 	
 	public void q5TotalMarketValuePerCapita(String propertiesFileName, String populationFileName) {
 		System.out.println("Please pick a zipcode");
-		int zip = UserOptions.getZipCode();
+		int zip = UserInterface.getZipCode();
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();
 		if (marketPerCapitas.containsKey(zip) == false) {
 			if (totalMarketValues.containsKey(zip) == false) {
@@ -161,7 +161,7 @@ public class Questions {
 	
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, String propertiesFileName, 
 		String populationFileName, String parkingFileName) {
-		int zip = UserOptions.getZipCode();
+		int zip = UserInterface.getZipCode();
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();
 		if (marketPerFinePerCapitas.containsKey(zip) == false) {
 			if (totalMarketValues.containsKey(zip) == false) {

@@ -3,7 +3,7 @@ package edu.upenn.cit594.main;
 import java.io.IOException;
 
 import edu.upenn.cit594.logging.Logging;
-import edu.upenn.cit594.ui.UserOptions;
+import edu.upenn.cit594.ui.UserInterface;
 
 public class Main {
 
@@ -26,6 +26,14 @@ public class Main {
 		String populationFileName = args[3];
 		Main.logFileName = args[4];
 		
+		
+		/*
+		 * @Cayde need singleton design pattern for logging
+		 * need timestamps
+		 */
+		
+		Logging logger = Logging.getInstance();
+		
 		/*
 		 * Start cycle of user options
 		 */
@@ -36,15 +44,10 @@ public class Main {
 		 * 
 		 */
 		
-		UserOptions uo = new UserOptions();
-		int selectedOption = uo.userOptions();
-		uo.followOption(selectedOption, fileType, parkingFileName, propertiesFileName, populationFileName);	
+		UserInterface ui = new UserInterface();
+		int selectedOption = ui.start();
+		ui.followOption(selectedOption, fileType, parkingFileName, propertiesFileName, populationFileName);	
 		
-		/*
-		 * @Cayde need singleton design pattern for logging
-		 * need timestamps
-		 */
-		
-		Logging logger = Logging.getInstance();
+
 	}
 }

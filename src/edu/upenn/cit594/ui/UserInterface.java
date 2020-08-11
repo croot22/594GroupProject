@@ -1,13 +1,14 @@
 package edu.upenn.cit594.ui;
 
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.Scanner;
 import edu.upenn.cit594.processor.Questions;
 
-public class UserOptions {
+public class UserInterface {
 
-	public int userOptions() {
+	protected Scanner scanner;
+	
+	
+	public int start() {
 		
 		/*
 		 * Initial screen
@@ -22,7 +23,8 @@ public class UserOptions {
 		System.out.println("5: Average total residential market value per capita for a specified zipcode");
 		System.out.println("6: Custom! Ratio of average total residential market value per capita to average fine per capita");
 		
-		Scanner scanner = new Scanner(System.in);
+		scanner = new Scanner(System.in);
+		
 		int selectedOption = scanner.nextInt();
 		scanner.close();
 		return selectedOption;
@@ -76,7 +78,7 @@ public class UserOptions {
 		 * Restart cycle
 		 */
 		
-		selectedOption = userOptions();
+		selectedOption = start();
 		followOption(selectedOption, parkingFileType, parkingFileName, propertiesFileName, populationFileName);
 		
 	}
