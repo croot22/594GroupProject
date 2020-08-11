@@ -39,7 +39,7 @@ public class UserInterface {
 		} catch(InputMismatchException e) {
 			System.out.println("Please input a number corresponding to one of the options.");
 		}
-		scanner.close();
+
 
 		/*
 		 * Select the method corresponding the selection
@@ -65,6 +65,7 @@ public class UserInterface {
 		else {
 			question.q6TotalMarketValuePerTotalFinesPerCapita(Main.fileType, Main.propertiesFileName, Main.populationFileName, Main.parkingFileName);
 		}
+		scanner.close();
 		start();
 	}
 
