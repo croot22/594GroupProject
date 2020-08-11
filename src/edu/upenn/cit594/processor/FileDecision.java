@@ -8,19 +8,19 @@ import edu.upenn.cit594.datamanagement.ReadParkingJson;
 
 public class FileDecision {
 
-	public TreeMap<Integer, Integer> fileDecision (String filetype, String parkingfilename) {
+	public TreeMap<Integer, Integer> fileDecision (String fileType, String parkingFileName) {
 		
 		/*
 		 * Read the appropriate parking file based on file type
 		 */
 		
 		TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>(); 
-		if (filetype.equals("csv")) {
-			ReadParkingCSV readParkingFile = new ReadParkingCSV(parkingfilename);
+		if (fileType.equals("csv")) {
+			ReadParkingCSV readParkingFile = new ReadParkingCSV(parkingFileName);
 			fines = readParkingFile.readCsvFile();
 		}
-		else if (filetype.equals("json")) {
-			ReadParkingJson readParkingFile = new ReadParkingJson(parkingfilename);
+		else if (fileType.equals("json")) {
+			ReadParkingJson readParkingFile = new ReadParkingJson(parkingFileName);
 			fines = readParkingFile.readJsonFile();
 		}
 		
