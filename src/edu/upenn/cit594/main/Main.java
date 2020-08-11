@@ -7,11 +7,11 @@ import edu.upenn.cit594.ui.UserInterface;
 
 public class Main {
 
-	public static String logFileName;
 	public static String fileType;
 	public static String parkingFileName;
 	public static String propertiesFileName;	
 	public static String populationFileName;
+	public static String logFileName;
 	
 	public static void main(String args[]) throws IOException {
 
@@ -35,8 +35,10 @@ public class Main {
 		 */
 		Logging logger = Logging.getInstance();
 		String currentTime = logger.getCurrentTime();
-		logger.log(currentTime);
-		
+		String logMessage = currentTime + Main.fileType + Main.parkingFileName + Main.propertiesFileName + 
+				Main.populationFileName + Main.logFileName;
+		logger.log(logMessage);
+
 		
 		/*
 		 * Start cycle of user options
