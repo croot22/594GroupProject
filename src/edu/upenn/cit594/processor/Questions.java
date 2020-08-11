@@ -32,8 +32,8 @@ public class Questions {
 	
 	public void q1TotalPopulation(String populationFileName) {
 		if (populations.isEmpty()) {
-			ReadPopulationFile readParkingFile = new ReadPopulationFile();
-			populations = readParkingFile.readPopulationFile(populationFileName);
+			ReadPopulationFile readPopulationFile = new ReadPopulationFile();
+			populations = readPopulationFile.readPopulationFile(populationFileName);
 		}
 		int totalPopulation = 0;
 		for (int population : populations.keySet()) {         //Simply totaling the individual populations
@@ -85,7 +85,7 @@ public class Questions {
 	 * Use strategy design pattern and/or separate methods
 	 * to decrease repetition
 	 */
-	public void q3AverageMarketValue(String propertiesFileName) throws IOException {
+	public void q3AverageMarketValue(String propertiesFileName) {
 		System.out.println("Please pick a zipcode");
 		Scanner i = new Scanner(System.in);
 		int zip = 0;
@@ -111,7 +111,7 @@ public class Questions {
 		System.out.println("Average Market value for " + zip + " is " + Math.round(averageMarketValues.get(zip)));
 	}
 	
-	public void q4AverageLivableArea(String propertiesFileName) throws IOException {
+	public void q4AverageLivableArea(String propertiesFileName) {
 		System.out.println("Please pick a zipcode");
 		Scanner scanner = new Scanner(System.in);							//@Cayde use strategy design pattern to decrease repetition
 		int zip = 0;
@@ -137,7 +137,7 @@ public class Questions {
 		System.out.println("Average livable area for " + zip + " is " + Math.round(averageLivableAreas.get(zip)));
 	}
 	
-	public void q5TotalMarketValuePerCapita(String propertiesFileName, String populationFileName) throws IOException {
+	public void q5TotalMarketValuePerCapita(String propertiesFileName, String populationFileName) {
 		System.out.println("Please pick a zipcode");
 		Scanner scanner = new Scanner(System.in);
 		int zip = 0;
@@ -169,7 +169,7 @@ public class Questions {
 	}
 	
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, String propertiesFileName, 
-			String populationFileName, String parkingFileName) throws IOException {
+			String populationFileName, String parkingFileName) {
 		System.out.println("Please pick a zipcode");
 		Scanner scanner = new Scanner(System.in);
 		int zip = 0;
