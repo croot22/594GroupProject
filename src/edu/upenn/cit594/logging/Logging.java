@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
+import edu.upenn.cit594.main.Main;
+
 public class Logging {
 	
 	/*
@@ -31,7 +33,7 @@ public class Logging {
 	 * 2. Singleton instance with parameter of file name in main
 	 */
 	
-	private static Logging instance = new Logging(fileName);
+	private static Logging instance = new Logging(Main.logFileName);
 	
 	/*
 	 * 3. Singleton accessor method

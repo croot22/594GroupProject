@@ -1,4 +1,4 @@
-package edu.upenn.cit594;
+package edu.upenn.cit594.main;
 
 import java.io.IOException;
 
@@ -8,6 +8,7 @@ import edu.upenn.cit594.ui.UserOptions;
 public class Main {
 
 	public static String logFileName;
+	
 	public static void main(String args[]) throws IOException {
 
 		if (args.length != 5) {
