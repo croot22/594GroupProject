@@ -20,10 +20,10 @@ public class Main {
 		 * Store arguments
 		 */
 		
-		String filetype = args[0];
-		String parkingfilename = args[1];
-		String propertiesfilename = args[2];	
-		String populationfilename = args[3];
+		String fileType = args[0];
+		String parkingFileName = args[1];
+		String propertiesFileName = args[2];	
+		String populationFileName = args[3];
 		Main.logFileName = args[4];
 		
 		/*
@@ -37,14 +37,14 @@ public class Main {
 		 */
 		
 		UserOptions uo = new UserOptions();
-		int selected_option = uo.userOptions();
-		uo.followOption(selected_option, filetype, parkingfilename, propertiesfilename, populationfilename);	
+		int selectedOption = uo.userOptions();
+		uo.followOption(selectedOption, fileType, parkingFileName, propertiesFileName, populationFileName);	
 		
 		/*
 		 * @Cayde need singleton design pattern for logging
 		 * need timestamps
 		 */
 		
-		Logging l = Logging.getInstance();
+		Logging logger = Logging.getInstance();
 	}
 }
