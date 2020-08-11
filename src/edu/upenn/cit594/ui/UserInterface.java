@@ -1,5 +1,6 @@
 package edu.upenn.cit594.ui;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import edu.upenn.cit594.processor.Questions;
 
@@ -24,8 +25,16 @@ public class UserInterface {
 		System.out.println("6: Custom! Ratio of average total residential market value per capita to average fine per capita");
 		
 		scanner = new Scanner(System.in);
-		
-		int selectedOption = scanner.nextInt();
+		int selectedOption = -1;
+		try {
+		selectedOption = scanner.nextInt();
+		while (selectedOption > 6 || selectedOption < 0) {
+			System.out.println("Please input a number corresponding to one of the options.");
+			selectedOption = scanner.nextInt();
+		}
+		} catch(InputMismatchException e) {
+			System.out.println("Please input a number corresponding to one of the options.");
+		}
 		scanner.close();
 		return selectedOption;
 	}
