@@ -23,8 +23,8 @@ public class Questions {
 	public static TreeMap<Integer, Double> finesPerCapitas = new TreeMap<Integer, Double>();
 	public static HashMap<Integer, ArrayList <Integer>> marketValues = new HashMap<Integer, ArrayList<Integer>>();
 	public static HashMap<Integer, ArrayList<Integer>> livableAreas = new HashMap<Integer, ArrayList<Integer>>();
-	public static HashMap<Integer, Long> totalMarketValues = new HashMap<Integer, Long>();
-	public static HashMap<Integer, Long> totalLivableAreas = new HashMap<Integer, Long>();
+	public static HashMap<Integer, Double> totalMarketValues = new HashMap<Integer, Double>();
+	public static HashMap<Integer, Double> totalLivableAreas = new HashMap<Integer, Double>();
 	public static HashMap<Integer, Double> averageMarketValues = new HashMap<Integer, Double>();
 	public static HashMap<Integer, Double> averageLivableAreas = new HashMap<Integer, Double>();
 	public static HashMap<Integer, Double> marketPerCapitas = new HashMap<Integer, Double>();
@@ -97,7 +97,7 @@ public class Questions {
 			marketValues.put(zip, marketValueList);  			//Memoize if not already stored
 		}	
 		if (totalMarketValues.containsKey(zip) == false) {   	//@Cayde this may be unnecessary step or previous may be
-			long totalMarketValue = 0; 						//@Cayde probably could be double
+			double totalMarketValue = 0; 						//@Cayde probably could be double
 			for (int marketValue: marketValues.get(zip)) {
 				totalMarketValue += marketValue;
 			}
@@ -123,7 +123,7 @@ public class Questions {
 			livableAreas.put(zip, livableAreaList);  			//Memoize if not already stored
 		}	
 		if (totalLivableAreas.containsKey(zip) == false) {
-			long totalLivableArea = 0;
+			double totalLivableArea = 0;
 			for (int livableArea: livableAreas.get(zip)) {
 				totalLivableArea += livableArea;
 			}
@@ -151,7 +151,7 @@ public class Questions {
 					marketValueList = rp.readProperties(3, propertiesFileName, zip);
 					marketValues.put(zip, marketValueList);				//Memoize if not already stored
 				}
-				long totalMarketValue = 0;
+				double totalMarketValue = 0;
 				for (int marketValue: marketValues.get(zip)) {
 					totalMarketValue += marketValue;
 				}
@@ -182,7 +182,7 @@ public class Questions {
 					marketValueList = rp.readProperties(3, propertiesFileName, zip);
 					marketValues.put(zip, marketValueList);				//Memoize if not already stored
 				}
-				long totalMarketValue = 0;
+				double totalMarketValue = 0;
 				for (int marketValue: marketValues.get(zip)) {
 					totalMarketValue += marketValue;
 				}
