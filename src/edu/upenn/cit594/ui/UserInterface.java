@@ -41,9 +41,7 @@ public class UserInterface {
 		}
 
 
-		/*
-		 * Select the method corresponding the selection
-		 */
+		//Select the method corresponding to the selection
 		if(selectedOption == 0) {
 			System.exit(0);
 		}
@@ -54,23 +52,30 @@ public class UserInterface {
 			question.q2TotalFinesPerCapita(Main.fileType, Main.parkingFileName, Main.populationFileName);
 		}
 		else if (selectedOption == 3) {
-			question.q3AverageMarketValue(Main.propertiesFileName);
+			int zip = getZipCode();
+			question.q3AverageMarketValue(Main.propertiesFileName, zip);
 		}
 		else if (selectedOption == 4) {
-			question.q4AverageLivableArea(Main.propertiesFileName);
+			int zip = getZipCode();
+			question.q4AverageLivableArea(Main.propertiesFileName, zip);
 		}
 		else if(selectedOption == 5) {
-			question.q5TotalMarketValuePerCapita(Main.propertiesFileName, Main.populationFileName);
+			int zip = getZipCode();
+			question.q5TotalMarketValuePerCapita(Main.propertiesFileName, Main.populationFileName, zip);
 		}
 		else {
-			question.q6TotalMarketValuePerTotalFinesPerCapita(Main.fileType, Main.propertiesFileName, Main.populationFileName, Main.parkingFileName);
+			int zip = getZipCode();
+			question.q6TotalMarketValuePerTotalFinesPerCapita(Main.fileType, Main.propertiesFileName, 
+					Main.populationFileName, Main.parkingFileName, zip);
 		}
 		scanner.close();
 		start();
 	}
 
-
-	public static int getZipCode() {
+	/*
+	 * Helper method to get zipcode from user
+	 */
+	private int getZipCode() {
 		System.out.println("Please pick a zipcode");
 		Scanner scanner = new Scanner(System.in);
 		int zip = 0;
