@@ -2,6 +2,8 @@ package edu.upenn.cit594.ui;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import edu.upenn.cit594.main.Main;
 import edu.upenn.cit594.processor.Questions;
 
 public class UserInterface {
@@ -26,6 +28,8 @@ public class UserInterface {
 
 		scanner = new Scanner(System.in);
 		int selectedOption = -1;
+		Questions question = new Questions();
+		
 		try {
 			selectedOption = scanner.nextInt();
 			while (selectedOption > 6 || selectedOption < 0) {
@@ -37,33 +41,34 @@ public class UserInterface {
 		}
 		scanner.close();
 
+		/*
+		 * Select the method corresponding the selection
+		 */
 		if(selectedOption == 0) {
 			System.exit(0);
 		}
 		else if (selectedOption == 1) {
-			question.q1TotalPopulation(populationFileName);
+			question.q1TotalPopulation(Main.populationFileName);
 		}
 		else if (selectedOption == 2) {
-			
+			question.q2TotalFinesPerCapita(Main.fileType, Main.parkingFileName, Main.populationFileName);
 		}
 		else if (selectedOption == 3) {
-			
+			question.q3AverageMarketValue(Main.propertiesFileName);
 		}
 		else if (selectedOption == 4) {
-			
+			question.q4AverageLivableArea(Main.propertiesFileName);
 		}
 		else if(selectedOption == 5) {
-			
+			question.q5TotalMarketValuePerCapita(Main.propertiesFileName, Main.populationFileName);
 		}
 		else {
-			
+			question.q6TotalMarketValuePerTotalFinesPerCapita(Main.fileType, Main.propertiesFileName, Main.populationFileName, Main.parkingFileName);
 		}
+		start();
 	}
 
-	/*
-	 * Select the method corresponding the selection
-	 * passing necessary files for each
-	 */
+
 	public static int getZipCode() {
 		System.out.println("Please pick a zipcode");
 		Scanner scanner = new Scanner(System.in);
@@ -71,46 +76,6 @@ public class UserInterface {
 		zip = scanner.nextInt();
 		scanner.close();
 		return zip;
-	}
-	/*
-	 * @Cayde
-	 * below method probably better in processor package
-	 */
-
-	public void followOption(int selectedOption, String parkingFileType, String parkingFileName, 
-			String propertiesFileName, String populationFileName){
-		Questions question = new Questions();
-		if (selectedOption == 0) {
-			Scanner i = new Scanner(System.in);
-			i.close();    // only close scanner on system exit to decrease resource leak
-			System.exit(0);
-		}
-		else if (selectedOption == 1) {    //should each of these methods be their own classes?  
-			question.q1TotalPopulation(populationFileName);
-		}
-		else if (selectedOption == 2) {
-			question.q2TotalFinesPerCapita(parkingFileType, parkingFileName, populationFileName);
-		}
-		else if (selectedOption == 3) {
-			question.q3AverageMarketValue(propertiesFileName);
-		}
-		else if (selectedOption == 4) {
-			question.q4AverageLivableArea(propertiesFileName);
-		}
-		else if (selectedOption == 5) {
-			question.q5TotalMarketValuePerCapita(propertiesFileName, populationFileName);
-		}
-		else if (selectedOption == 6) {
-			question.q6TotalMarketValuePerTotalFinesPerCapita(parkingFileType, propertiesFileName, populationFileName, parkingFileName);
-		}
-
-		/*
-		 * Restart cycle
-		 */
-
-		selectedOption = start();
-		followOption(selectedOption, parkingFileType, parkingFileName, propertiesFileName, populationFileName);
-
 	}
 
 

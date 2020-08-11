@@ -49,9 +49,7 @@ public class Main {
 		 */
 		
 		UserInterface ui = new UserInterface();
-		int selectedOption = ui.start();
-		ui.followOption(selectedOption, fileType, parkingFileName, propertiesFileName, populationFileName);	
-		
+		ui.start();
 
 	}
 }
