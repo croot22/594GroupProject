@@ -9,10 +9,10 @@ import java.util.TreeMap;
 
 public class ReadParkingCSV {
 
-	public String parkingfilename;
+	public String parkingFileName;
 	
 	public ReadParkingCSV(String parkingfilename) {
-		this.parkingfilename = parkingfilename;
+		this.parkingFileName = parkingfilename;
 	}
 
 	/*
@@ -21,14 +21,14 @@ public class ReadParkingCSV {
 	
 	
 	public TreeMap<Integer, Integer> readCsvFile() {
-		File parkinglist = new File(parkingfilename);
+		File parkingList = new File(parkingFileName);
 		TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>();
-		Scanner i;
-		String nextline;
+		Scanner scanner;
+		String nextLine;
 
 		
 		try {
-			i = new Scanner(parkinglist);
+			scanner = new Scanner(parkingList);
 			
 		} catch (FileNotFoundException e) {
 			return fines;
@@ -38,28 +38,28 @@ public class ReadParkingCSV {
 		 * If text file does not exist or can not be read
 		 */
 		
-		if ((parkinglist.canRead()) && (parkinglist.exists()) == false) {
+		if ((parkingList.canRead()) && (parkingList.exists()) == false) {
 			System.out.println("Error text file does not exist or can not be read");
 			System.exit(0);
 		}
 		
 		
-		while(i.hasNextLine()) {   //populates the array
-			nextline = i.nextLine();  //scan through each line
-			String datavalue[] = nextline.split(",");
-			if (datavalue.length == 7) {
-				int fine = Integer.parseInt(datavalue[1]);
-				int zipcode = Integer.parseInt(datavalue[6]);
-				if (fines.containsKey(zipcode)) {      //@Cayde should the sum totaling be moved to processor?  
-					int totalfine = fines.get(zipcode) + fine;
-					fines.put(zipcode, totalfine);
+		while(scanner.hasNextLine()) {   //populates the array
+			nextLine = scanner.nextLine();  //scan through each line
+			String dataValue[] = nextLine.split(",");
+			if (dataValue.length == 7) {
+				int fine = Integer.parseInt(dataValue[1]);
+				int zipCode = Integer.parseInt(dataValue[6]);
+				if (fines.containsKey(zipCode)) {      //@Cayde should the sum totaling be moved to processor?  
+					int totalfine = fines.get(zipCode) + fine;
+					fines.put(zipCode, totalfine);
 				}
 				else {
-					fines.put(zipcode, fine);
+					fines.put(zipCode, fine);
 				}			
 			}    
 		}	
-		i.close();
+		scanner.close();
 		return fines;
 	}
 	
