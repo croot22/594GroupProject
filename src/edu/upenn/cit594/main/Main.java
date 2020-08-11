@@ -35,8 +35,8 @@ public class Main {
 		 */
 		Logging logger = Logging.getInstance();
 		String currentTime = logger.getCurrentTime();
-		String logMessage = currentTime + Main.fileType + Main.parkingFileName + Main.propertiesFileName + 
-				Main.populationFileName + Main.logFileName;
+		String logMessage = currentTime +" "+ Main.fileType +" "+ Main.parkingFileName +" "+ 
+				Main.propertiesFileName + " "+ Main.populationFileName +" "+ Main.logFileName;
 		logger.log(logMessage);
 
 		
