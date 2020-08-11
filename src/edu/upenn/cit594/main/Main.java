@@ -21,7 +21,7 @@ public class Main {
 		}
 		
 		/*
-		 * Store arguments
+		 * Store arguments in static variables
 		 */
 		
 		Main.fileType = args[0];
@@ -34,7 +34,6 @@ public class Main {
 		 * log current time at start of program
 		 */
 		Logging logger = Logging.getInstance();
-
 		String currentTime = logger.getCurrentTime();
 		logger.log(currentTime);
 		
