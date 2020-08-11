@@ -1,6 +1,7 @@
 package edu.upenn.cit594.logging;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,9 +11,6 @@ import edu.upenn.cit594.main.Main;
 
 public class Logging {
 	
-	/*
-	 * Set up singleton design of logfile
-	 */
 	
 
 	private PrintWriter out;
@@ -22,11 +20,14 @@ public class Logging {
 	 */
 	
 	private Logging(String fileName) {
-		try {
-			out = new PrintWriter(new File(fileName));
-		} catch (Exception e) { 
-			
-		}
+			try {
+				out = new PrintWriter(new File(fileName));
+			} catch (FileNotFoundException e) {
+				
+				File file = new File(fileName);
+				
+			}
+
 	} 
 	
 	/*
@@ -43,6 +44,14 @@ public class Logging {
 		return instance;
 	}
 	
+	/*
+	 * Helper method to get current time as string
+	 */
+	public String getCurrentTime() {
+		Long time = System.currentTimeMillis();
+		String currentTimeAsString = time.toString();
+		return currentTimeAsString;
+	}
 	/*
 	 * Method for writing to logfile
 	 */
