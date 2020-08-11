@@ -16,12 +16,12 @@ public class FileDecision {
 		
 		TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>(); 
 		if (filetype.equals("csv")) {
-			ReadParkingCSV parkingFile = new ReadParkingCSV(parkingfilename);
-			fines = parkingFile.readCsvFile();
+			ReadParkingCSV readParkingFile = new ReadParkingCSV(parkingfilename);
+			fines = readParkingFile.readCsvFile();
 		}
 		else if (filetype.equals("json")) {
-			ReadParkingJson parkingFile = new ReadParkingJson(parkingfilename);
-			fines = parkingFile.readJsonFile();
+			ReadParkingJson readParkingFile = new ReadParkingJson(parkingfilename);
+			fines = readParkingFile.readJsonFile();
 		}
 		
 		/*
