@@ -2,11 +2,7 @@ package edu.upenn.cit594.logging;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-
 import edu.upenn.cit594.main.Main;
 
 public class Logging {
@@ -24,8 +20,8 @@ public class Logging {
 				out = new PrintWriter(new File(fileName));
 			} catch (FileNotFoundException e) {
 				
-				File file = new File(fileName);
-				
+				System.out.println("File of that name was not found.");
+				System.exit(0);
 			}
 
 	} 
