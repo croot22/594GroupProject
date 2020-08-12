@@ -1,9 +1,6 @@
 package edu.upenn.cit594.data;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.TreeMap;
 
 public class ZipCodeData {
 	
