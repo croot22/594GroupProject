@@ -6,6 +6,8 @@ public class OverallData {
 	
 	public static double totalMarketValues = 0 ;
 	public static double totalLivableAreas = 0 ;
+	public static boolean averageFinesPerCapitaStored = false;
+	public static boolean totalFinesStored = false;
 	public static double averageMarketValues = 0 ;
 	public static double averageLivableAreas = 0 ;
 	public static double marketPerCapitas = 0 ;

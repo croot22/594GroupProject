@@ -14,6 +14,8 @@ public class ZipCodeProcessor {
 				totalFines += fine;
 			}
 		}
+		// show memoization of totalFines
+		OverallData.totalFinesStored = true;
 		return totalFines;
 	}
 	
@@ -26,4 +28,8 @@ public class ZipCodeProcessor {
 		}
 		return totalPopulation;
 	}
+	
+	
+	
+	
 }
