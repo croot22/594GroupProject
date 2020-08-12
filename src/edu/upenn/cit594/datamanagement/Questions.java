@@ -1,10 +1,9 @@
-package edu.upenn.cit594.processor;
+package edu.upenn.cit594.datamanagement;
 
 import java.text.DecimalFormat;
 import edu.upenn.cit594.data.OverallData;
 import edu.upenn.cit594.data.ZipCodeData;
-import edu.upenn.cit594.datamanagement.ReadPopulationFile;
-import edu.upenn.cit594.datamanagement.ReadProperties;
+import edu.upenn.cit594.processor.ZipCodeProcessor;
 
 public class Questions {
 

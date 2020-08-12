@@ -1,8 +1,6 @@
-package edu.upenn.cit594.processor;
+package edu.upenn.cit594.datamanagement;
 
 import edu.upenn.cit594.data.OverallData;
-import edu.upenn.cit594.datamanagement.ReadParkingCSV;
-import edu.upenn.cit594.datamanagement.ReadParkingJson;
 
 public class FileDecision {
 

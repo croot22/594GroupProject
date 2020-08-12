@@ -3,8 +3,8 @@ package edu.upenn.cit594.ui;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import edu.upenn.cit594.datamanagement.Questions;
 import edu.upenn.cit594.main.Main;
-import edu.upenn.cit594.processor.Questions;
 
 public class UserInterface {
 
