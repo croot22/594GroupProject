@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.logging.Logging;
 
 
@@ -23,7 +24,7 @@ public class ReadParkingJson {
 		this.parkingFileName = parkingFileName;
 	}
 	
-	public TreeMap<Integer, Integer> readJsonFile() {
+	public void readJsonFile() {
 		TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>();
 		File parkingList = new File(parkingFileName);
 		
@@ -63,11 +64,14 @@ public class ReadParkingJson {
 				int fine = (int) longFine;    
 				int zipCode = Integer.parseInt(stringZipCode);
 				
+				//create zip object if not already created, and add fine
+				ZipCodeData zipData = new ZipCodeData();
+				if(ZipCodeData.zipCodeMap.containsKey(zipCode)) {
+					zipData = ZipCodeData.zipCodeMap.get(zipCode);
+				}
+				zipData.fines.add(fine);
 			} 
 		}
-		//for (int zipcode : fines.keySet()) {
-		//	System.out.println(zipcode + " " + fines.get(zipcode));
-		//}
-		return fines;
+
 	} 
 }
