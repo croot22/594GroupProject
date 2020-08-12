@@ -110,8 +110,8 @@ public class Questions {
 		if (zipData.totalMarketValue == 0) {
 			zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
 		}
-		if (zipData.totalLivableAreas == 0) {
-			zipData.totalLivableAreas = ZipCodeProcessor.totalLivableAreas(zip);
+		if (zipData.totalLivableArea == 0) {
+			zipData.totalLivableArea = ZipCodeProcessor.totalLivableAreas(zip);
 		}
 		if (zipData.averageMarketValue == 0) {
 			zipData.averageMarketValue = ZipCodeProcessor.averageMarketValue(zip);
@@ -121,26 +121,19 @@ public class Questions {
 	}
 
 	public void q4AverageLivableArea(String propertiesFileName, int zip) {
-
-		ArrayList<Integer> livableAreaList = new ArrayList<Integer>();
-		if (livableAreas.containsKey(zip) == false) {
+		ZipCodeData zipData = ZipCodeData.zipCodeMap.get(zip);
+		//ArrayList<Integer> livableAreaList = new ArrayList<Integer>();
+		if (zipData.marketValue == null) {
 			ReadProperties rp = new ReadProperties();
-			livableAreaList = rp.readProperties(4, propertiesFileName, zip);
-			livableAreas.put(zip, livableAreaList);  			//Memoize if not already stored
 		}	
-		if (totalLivableAreas.containsKey(zip) == false) {
-			double totalLivableArea = 0;
-			for (int livableArea: livableAreas.get(zip)) {
-				totalLivableArea += livableArea;
-			}
-			totalLivableAreas.put(zip, totalLivableArea);		//Memoize if not already stored
+		if (zipData.totalLivableArea == 0) {
+			zipData.totalLivableArea = ZipCodeProcessor.totalLivableAreas(zip);
 		}
-		if (averageLivableAreas.containsKey(zip) == false) {
-			double averageLivableArea = (double) totalLivableAreas.get(zip) /
-					(double) livableAreas.get(zip).size();
-			averageLivableAreas.put(zip, averageLivableArea);	//Memoize if not already stored
+		if (zipData.averageLivableArea == 0) {
+			zipData.averageLivableArea = ZipCodeProcessor.averageLivableArea(zip);
 		}
-		System.out.println("Average livable area for " + zip + " is " + Math.round(averageLivableAreas.get(zip)));
+		System.out.println("Average livable area for " + zip + " is " + 
+		Math.round(zipData.averageLivableArea));
 	}
 
 	public void q5TotalMarketValuePerCapita(String propertiesFileName, 

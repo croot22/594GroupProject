@@ -65,9 +65,17 @@ public class ZipCodeProcessor {
 		double averageMarketValue = 0;
 		
 		ZipCodeData zipCode = ZipCodeData.zipCodeMap.get(zip);
-		averageMarketValue = zipCode.totalMarketValue / zipCode.livableArea;
+		averageMarketValue = zipCode.totalMarketValue / zipCode.households;
 		
 		return averageMarketValue;
 	}
 	
+	public static double averageLivableArea(int zip) {
+		double averageLivableArea = 0;
+		
+		ZipCodeData zipCode = ZipCodeData.zipCodeMap.get(zip);
+		averageLivableArea = zipCode.totalLivableArea / zipCode.households;
+		
+		return averageLivableArea;
+	}
 }

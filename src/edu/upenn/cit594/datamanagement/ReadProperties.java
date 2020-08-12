@@ -77,6 +77,7 @@ public class ReadProperties {
 			 */
 			
 			if (selectedOption == 4) {
+				zip.households = 0;
 				while((nextLine = reader.readLine()) != null) {  
 					String[] line = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
 			
@@ -84,12 +85,13 @@ public class ReadProperties {
 			 * First checks zipcode has 5 characters before getting substring
 			 * and compares substring to inputted zipcode		
 			 */
-					
+
 					if ((line[zipCodeColumn].length() > 5) && 
 						((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
 						if (isNumeric(line[livableAreaColumn])) {
 							livableArea = (int) Double.parseDouble(line[livableAreaColumn]);
 							zip.livableArea.add(livableArea);
+							zip.households += 1;
 						}
 					} 
 				} 
@@ -101,6 +103,7 @@ public class ReadProperties {
 			 */
 			
 			else if ((selectedOption == 3) || (selectedOption > 4)) {
+				zip.households = 0;
 				while((nextLine = reader.readLine()) != null) {  
 					String[] line = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
 					if ((line[zipCodeColumn].length() > 5) && 
@@ -109,7 +112,7 @@ public class ReadProperties {
 							marketValue = (int) Double.parseDouble(line[marketValueColumn]);
 
 							zip.marketValue.add(marketValue);
-							
+							zip.households += 1;
 						}
 					}
 				}
