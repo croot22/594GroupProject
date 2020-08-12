@@ -139,7 +139,7 @@ public class Questions {
 			if (OverallData.totalPopulation == 0) {
 				totalPop(populationFileName);
 			}
-			zipData.marketValuePerCapita = zipProcessor.marketValuePerCapita();
+			zipData.marketValuePerCapita = zipProcessor.marketValuePerCapita(zip);
 			
 		}
 		System.out.println("Total Market Value per Capital for " + zip + " is " + 
@@ -167,7 +167,7 @@ public class Questions {
 				
 				fd.fileDecision(parkingFileType, parkingFileName);
 			}
-			zipData.marketValuePerFinePerCapita = zipProcessor.marketValuePerFinesPerCapita();
+			zipData.marketValuePerFinePerCapita = zipProcessor.marketValuePerFinesPerCapita(zip);
 			
 		}
 		System.out.println(Math.round(zipData.marketValuePerFinePerCapita));
