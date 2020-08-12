@@ -1,10 +1,7 @@
 package edu.upenn.cit594.processor;
 
-import java.text.DecimalFormat;
-
 import edu.upenn.cit594.data.OverallData;
 import edu.upenn.cit594.data.ZipCodeData;
-import edu.upenn.cit594.datamanagement.ReadPopulationFile;
 
 public class ZipCodeProcessor {
 
