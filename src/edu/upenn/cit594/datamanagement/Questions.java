@@ -3,6 +3,8 @@ package edu.upenn.cit594.datamanagement;
 import java.text.DecimalFormat;
 import edu.upenn.cit594.data.OverallData;
 import edu.upenn.cit594.data.ZipCodeData;
+import edu.upenn.cit594.processor.AverageLivableAreaProcessor;
+import edu.upenn.cit594.processor.AverageMarketValueProcessor;
 import edu.upenn.cit594.processor.ZipCodeProcessor;
 
 public class Questions {
@@ -88,36 +90,17 @@ public class Questions {
 	 * to decrease repetition
 	 */
 	public void q3AverageMarketValue(String propertiesFileName, int zip) {
-		zipData = OverallData.zipCodeMap.get(zip);
-
-		if (zipData.averageMarketValue == 0) {
-			if (zipData.totalMarketValue == 0) {
-				if (zipData.marketValue == null) {
-					rp.readProperties(5, propertiesFileName, zip);
-				}	
-				zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
-			}
-
-			zipData.averageMarketValue = zipProcessor.averageMarketValue(zip);
-		}
+		AverageMarketValueProcessor amvp = new AverageMarketValueProcessor();
+		double averageMarketValue = amvp.getAverage(propertiesFileName, zip);
 		System.out.println("Average Market value for " + zip + " is " + 
-				Math.round(zipData.averageMarketValue));
+				Math.round(averageMarketValue));
 	}
 
 	public void q4AverageLivableArea(String propertiesFileName, int zip) {
-		zipData = OverallData.zipCodeMap.get(zip);
-
-		if (zipData.averageLivableArea == 0) {
-			if (zipData.totalLivableArea == 0) {
-				if (zipData.livableArea == null) {
-					rp.readProperties(5, propertiesFileName, zip);
-				}	
-				zipData.totalLivableArea = zipProcessor.totalLivableAreas(zip);
-			}
-			zipData.averageLivableArea = zipProcessor.averageLivableArea(zip);
-		}
+		AverageLivableAreaProcessor alap = new AverageLivableAreaProcessor();
+		double averageLivableArea = alap.getAverage(propertiesFileName, zip);
 		System.out.println("Average livable area for " + zip + " is " + 
-				Math.round(zipData.averageLivableArea));
+				Math.round(averageLivableArea));
 	}
 
 	public void q5TotalMarketValuePerCapita(String propertiesFileName, 
@@ -150,7 +133,7 @@ public class Questions {
 			if (zipData.totalMarketValue == 0) {
 				if (zipData.marketValue == null) {
 
-					rp.readProperties(5, propertiesFileName, zip);
+					rp.readProperties(6, propertiesFileName, zip);
 
 				}
 				zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
