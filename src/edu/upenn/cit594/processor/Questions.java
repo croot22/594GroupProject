@@ -18,6 +18,7 @@ public class Questions {
 	ReadProperties rp = new ReadProperties();
 	FileDecision fd = new FileDecision();
 	ReadPopulationFile rpf = new ReadPopulationFile();
+	ZipCodeProcessor zipProcessor = new ZipCodeProcessor();
 	
 	public void q1TotalPopulation(String populationFileName) {
 		if (OverallData.totalPopulation == 0) {
@@ -48,7 +49,7 @@ public class Questions {
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 
 				zipData = OverallData.zipCodeMap.get(zipCode);
-				zipData.totalFines = ZipCodeProcessor.fineTotal(zipCode);
+				zipData.totalFines = zipProcessor.fineTotal(zipCode);
 
 			}
 		}
@@ -56,7 +57,7 @@ public class Questions {
 
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 				zipData = OverallData.zipCodeMap.get(zipCode);
-				zipData.totalFinesPerCapita = ZipCodeProcessor.averageFinePerCapita(zipCode);
+				zipData.totalFinesPerCapita = zipProcessor.averageFinePerCapita(zipCode);
 				System.out.println(zipCode + " $" + 
 						decForm.format(zipData.totalFinesPerCapita));
 			}
@@ -73,7 +74,7 @@ public class Questions {
 	private void totalPop(String populationFileName) {
 		
 		rpf.readPopulationFile(populationFileName);
-		OverallData.totalPopulation = ZipCodeProcessor.populationTotal();
+		OverallData.totalPopulation = zipProcessor.populationTotal();
 	}
 
 
@@ -98,10 +99,10 @@ public class Questions {
 		}	
 		
 		if (zipData.totalMarketValue == 0) {
-			zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
+			zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
 		}
 		if (zipData.averageMarketValue == 0) {
-			zipData.averageMarketValue = ZipCodeProcessor.averageMarketValue(zip);
+			zipData.averageMarketValue = zipProcessor.averageMarketValue(zip);
 		}
 		System.out.println("Average Market value for " + zip + " is " + 
 				Math.round(zipData.averageMarketValue));
@@ -115,10 +116,10 @@ public class Questions {
 			rp.readProperties(5, propertiesFileName, zip);
 		}	
 		if (zipData.totalLivableArea == 0) {
-			zipData.totalLivableArea = ZipCodeProcessor.totalLivableAreas(zip);
+			zipData.totalLivableArea = zipProcessor.totalLivableAreas(zip);
 		}
 		if (zipData.averageLivableArea == 0) {
-			zipData.averageLivableArea = ZipCodeProcessor.averageLivableArea(zip);
+			zipData.averageLivableArea = zipProcessor.averageLivableArea(zip);
 		}
 		System.out.println("Average livable area for " + zip + " is " + 
 		Math.round(zipData.averageLivableArea));
@@ -134,13 +135,13 @@ public class Questions {
 					
 					rp.readProperties(5, propertiesFileName, zip);
 				}
-				zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
+				zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
 				
 			}
 			if (OverallData.totalPopulation == 0) {
 				totalPop(populationFileName);
 			}
-			zipData.marketValuePerCapita = ZipCodeProcessor.marketValuePerCapita();
+			zipData.marketValuePerCapita = zipProcessor.marketValuePerCapita();
 			
 		}
 		System.out.println("Total Market Value per Capital for " + zip + " is " + 
@@ -157,7 +158,7 @@ public class Questions {
 					rp.readProperties(5, propertiesFileName, zip);
 					
 				}
-				zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
+				zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
 				
 			}
 			if (zipData.population == 0) {
@@ -168,7 +169,7 @@ public class Questions {
 				
 				fd.fileDecision(parkingFileType, parkingFileName);
 			}
-			zipData.marketValuePerFinePerCapita = ZipCodeProcessor.marketValuePerFinesPerCapita();
+			zipData.marketValuePerFinePerCapita = zipProcessor.marketValuePerFinesPerCapita();
 			
 		}
 		System.out.println(Math.round(zipData.marketValuePerFinePerCapita));

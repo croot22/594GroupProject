@@ -5,7 +5,7 @@ import edu.upenn.cit594.data.ZipCodeData;
 
 public class ZipCodeProcessor {
 
-	public static int fineTotal(int zipCode) {
+	public int fineTotal(int zipCode) {
 		int totalFines = 0;
 		if (OverallData.zipCodeMap.containsKey(zipCode)) {  
 			ZipCodeData zipMap = OverallData.zipCodeMap.get(zipCode);
@@ -17,7 +17,7 @@ public class ZipCodeProcessor {
 		return totalFines;
 	}
 	
-	public static int populationTotal() {
+	public int populationTotal() {
 		int totalPopulation = 0;
 		for(Integer zip: OverallData.zipCodeMap.keySet()) {
 			
@@ -27,7 +27,7 @@ public class ZipCodeProcessor {
 		return totalPopulation;
 	}
 	
-	public static double averageFinePerCapita(int zip) {
+	public double averageFinePerCapita(int zip) {
 		int avgFine = 0;
 	
 		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
@@ -36,7 +36,7 @@ public class ZipCodeProcessor {
 		return avgFine;
 	}
 	
-	public static double totalMarketValue(int zip) {
+	public double totalMarketValue(int zip) {
 		double totalMarketValue = 0;
 		
 		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
@@ -47,7 +47,7 @@ public class ZipCodeProcessor {
 		return totalMarketValue;
 	}
 	
-	public static double totalLivableAreas(int zip) {
+	public double totalLivableAreas(int zip) {
 		double totalLivableAreas = 0;
 		
 		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
@@ -58,7 +58,7 @@ public class ZipCodeProcessor {
 		return totalLivableAreas;
 	}
 	
-	public static double averageMarketValue(int zip) {
+	public double averageMarketValue(int zip) {
 		double averageMarketValue = 0;
 		
 		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
@@ -67,7 +67,7 @@ public class ZipCodeProcessor {
 		return averageMarketValue;
 	}
 	
-	public static double averageLivableArea(int zip) {
+	public double averageLivableArea(int zip) {
 		double averageLivableArea = 0;
 		
 		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
@@ -76,11 +76,11 @@ public class ZipCodeProcessor {
 		return averageLivableArea;
 	}
 	
-	public static double marketValuePerCapita() {
+	public double marketValuePerCapita() {
 		return 0;
 	}
 	
-	public static double marketValuePerFinesPerCapita() {
+	public double marketValuePerFinesPerCapita() {
 		return 0;
 	}
 }
