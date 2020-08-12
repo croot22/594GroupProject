@@ -23,8 +23,10 @@ public class UserInterface {
 		System.out.println("2: Total Parking fines per capita for each zipcode");
 		System.out.println("3: Average market value for a specified zipcode");
 		System.out.println("4: Average total livable area for a specified zipcode");
-		System.out.println("5: Average total residential market value per capita for a specified zipcode");
-		System.out.println("6: Custom! Ratio of average total residential market value per capita to average fine per capita");
+		System.out.println("5: Average total residential market value per capita for "
+				+ "a specified zipcode");
+		System.out.println("6: Custom! Ratio of average total residential market value "
+				+ "per capita to average fine per capita");
 
 		scanner = new Scanner(System.in);
 		int selectedOption = -1;
@@ -49,7 +51,8 @@ public class UserInterface {
 			question.q1TotalPopulation(Main.populationFileName);
 		}
 		else if (selectedOption == 2) {
-			question.q2TotalFinesPerCapita(Main.fileType, Main.parkingFileName, Main.populationFileName);
+			question.q2TotalFinesPerCapita(Main.fileType, Main.parkingFileName, 
+					Main.populationFileName);
 		}
 		else if (selectedOption == 3) {
 			int zip = getZipCode();
@@ -61,7 +64,8 @@ public class UserInterface {
 		}
 		else if(selectedOption == 5) {
 			int zip = getZipCode();
-			question.q5TotalMarketValuePerCapita(Main.propertiesFileName, Main.populationFileName, zip);
+			question.q5TotalMarketValuePerCapita(Main.propertiesFileName, 
+					Main.populationFileName, zip);
 		}
 		else {
 			int zip = getZipCode();
@@ -79,7 +83,13 @@ public class UserInterface {
 		System.out.println("Please pick a zipcode");
 		Scanner scanner = new Scanner(System.in);
 		int zip = 0;
-		zip = scanner.nextInt();
+		try {
+			zip = scanner.nextInt();
+		}
+		catch(InputMismatchException e) {
+			System.out.println("The zipcode input is not in the correct 5 digit format.");
+			System.exit(0);
+		}
 		scanner.close();
 		return zip;
 	}
