@@ -9,8 +9,6 @@ import edu.upenn.cit594.datamanagement.ReadProperties;
 public class Questions {
 
 	/*
-	 * Create static maps for memoization
-	 * Many maps for many possible future uses
 	 * Repeated method is check if already memoized,
 	 * If not, then perform file reading and memoization
 	 */
