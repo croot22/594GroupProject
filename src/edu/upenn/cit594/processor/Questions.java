@@ -21,7 +21,8 @@ public class Questions {
 	 * Repeated method is check if already memoized,
 	 * If not, then perform file reading and memoization
 	 */
-
+	ZipCodeData zipData = new ZipCodeData();
+	
 
 
 	public void q1TotalPopulation(String populationFileName) {
@@ -50,25 +51,25 @@ public class Questions {
 		}
 		if (OverallData.totalFinesStored == false){
 
-			for (Integer zipCode : ZipCodeData.zipCodeMap.keySet()) {
+			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 
-				ZipCodeData zip = ZipCodeData.zipCodeMap.get(zipCode);
+				ZipCodeData zip = OverallData.zipCodeMap.get(zipCode);
 				zip.totalFines = ZipCodeProcessor.fineTotal(zipCode);
 
 			}
 		}
 		if (OverallData.averageFinesPerCapitaStored == false) {
 
-			for (Integer zipCode : ZipCodeData.zipCodeMap.keySet()) {
-				ZipCodeData zip = ZipCodeData.zipCodeMap.get(zipCode);
+			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
+				ZipCodeData zip = OverallData.zipCodeMap.get(zipCode);
 				zip.totalFinesPerCapita = ZipCodeProcessor.averageFinePerCapita(zipCode);
 				System.out.println(zipCode + " $" + 
 						decForm.format(zip.totalFinesPerCapita));
 			}
 		}
 		else {
-			for (Integer zipCode : ZipCodeData.zipCodeMap.keySet()) {
-				ZipCodeData zip = ZipCodeData.zipCodeMap.get(zipCode);
+			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
+				ZipCodeData zip = OverallData.zipCodeMap.get(zipCode);
 				System.out.println(zipCode + " $" + 
 						decForm.format(zip.totalFinesPerCapita));
 			}
@@ -95,17 +96,15 @@ public class Questions {
 	 * to decrease repetition
 	 */
 	public void q3AverageMarketValue(String propertiesFileName, int zip) {
-		ZipCodeData zipData = ZipCodeData.zipCodeMap.get(zip);
+		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
 		
 		if (zipData.marketValue == null) {
-			ReadProperties readProperties = new ReadProperties();
+			ReadProperties rp = new ReadProperties();
+			rp.readProperties(5, propertiesFileName, zip);
 		}	
 		
 		if (zipData.totalMarketValue == 0) {
 			zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
-		}
-		if (zipData.totalLivableArea == 0) {
-			zipData.totalLivableArea = ZipCodeProcessor.totalLivableAreas(zip);
 		}
 		if (zipData.averageMarketValue == 0) {
 			zipData.averageMarketValue = ZipCodeProcessor.averageMarketValue(zip);
@@ -115,10 +114,11 @@ public class Questions {
 	}
 
 	public void q4AverageLivableArea(String propertiesFileName, int zip) {
-		ZipCodeData zipData = ZipCodeData.zipCodeMap.get(zip);
+		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
 		
 		if (zipData.marketValue == null) {
 			ReadProperties rp = new ReadProperties();
+			rp.readProperties(5, propertiesFileName, zip);
 		}	
 		if (zipData.totalLivableArea == 0) {
 			zipData.totalLivableArea = ZipCodeProcessor.totalLivableAreas(zip);
@@ -132,19 +132,19 @@ public class Questions {
 
 	public void q5TotalMarketValuePerCapita(String propertiesFileName, 
 			String populationFileName, int zip) {
-		ZipCodeData zipData = ZipCodeData.zipCodeMap.get(zip);
+		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
 		
 		if (zipData.marketValuePerCapita == 0) {
 			if (zipData.totalMarketValue == 0) {
 				if (zipData.marketValue == null) {
 					ReadProperties rp = new ReadProperties();
-
+					rp.readProperties(5, propertiesFileName, zip);
 				}
-				double totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
+				zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
 				
 			}
-			if (zipData.population == 0) {
-				ReadPopulationFile rpf = new ReadPopulationFile();
+			if (OverallData.totalPopulation == 0) {
+				totalPop(populationFileName);
 			}
 			zipData.marketValuePerCapita = ZipCodeProcessor.marketValuePerCapita();
 			
@@ -155,18 +155,19 @@ public class Questions {
 
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, String propertiesFileName, 
 			String populationFileName, String parkingFileName, int zip) {
-		ZipCodeData zipData = ZipCodeData.zipCodeMap.get(zip);
+		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
 		if (zipData.marketValuePerFinePerCapita == 0) {
 			if (zipData.totalMarketValue == 0) {
 				if (zipData.marketValue == null) {
 					ReadProperties rp = new ReadProperties();
+					rp.readProperties(5, propertiesFileName, zip);
 					
 				}
 				zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
 				
 			}
 			if (zipData.population == 0) {
-				ReadPopulationFile rpf = new ReadPopulationFile();
+				totalPop(populationFileName);
 			    
 			}
 			if (zipData.totalFinesPerCapita == 0) {

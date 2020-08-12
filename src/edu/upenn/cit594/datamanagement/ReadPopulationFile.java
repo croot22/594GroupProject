@@ -2,19 +2,18 @@ package edu.upenn.cit594.datamanagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
 import java.util.Scanner;
 
+import edu.upenn.cit594.data.OverallData;
 import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.logging.Logging;
-import edu.upenn.cit594.main.Main;
 
 public class ReadPopulationFile {
 
 	public void readPopulationFile(String populationFileName) {
 		File populationList = new File(populationFileName);
 		Scanner scanner;
-		HashMap<Integer, Integer> populations = new HashMap<Integer, Integer>();
+		
 		try {
 			scanner = new Scanner(populationList);
 			
@@ -46,11 +45,11 @@ public class ReadPopulationFile {
 					int zipCode = Integer.parseInt(dataValue[0]); 			     
 				    int population = Integer.parseInt(dataValue[1]);
 				    ZipCodeData zip = new ZipCodeData();
-				    if (ZipCodeData.zipCodeMap.containsKey(zipCode)) {
-				    	zip = ZipCodeData.zipCodeMap.get(zipCode);
+				    if (OverallData.zipCodeMap.containsKey(zipCode)) {
+				    	zip = OverallData.zipCodeMap.get(zipCode);
 				    }
 			    	zip.population = population;
-			    	ZipCodeData.zipCodeMap.put(zipCode, zip);
+			    	OverallData.zipCodeMap.put(zipCode, zip);
 				}
 			}	
 			scanner.close();

@@ -2,11 +2,8 @@ package edu.upenn.cit594.datamanagement;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
 import java.util.Scanner;
-import java.util.TreeMap;
-
+import edu.upenn.cit594.data.OverallData;
 import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.logging.Logging;
 
@@ -26,7 +23,6 @@ public class ReadParkingCSV {
 
 	public void readCsvFile() {
 		File parkingList = new File(parkingFileName);
-		TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>();
 		Scanner scanner;
 		String nextLine;
 
@@ -56,8 +52,8 @@ public class ReadParkingCSV {
 					int zipCode = Integer.parseInt(dataValue[6]);
 					ZipCodeData zipCodeData = new ZipCodeData();
 					//checking static map to see if zipcode is already memoized
-					if(ZipCodeData.zipCodeMap.containsKey(zipCode)) {
-						zipCodeData = ZipCodeData.zipCodeMap.get(zipCode);
+					if(OverallData.zipCodeMap.containsKey(zipCode)) {
+						zipCodeData = OverallData.zipCodeMap.get(zipCode);
 						
 					}
 					else {
@@ -66,7 +62,7 @@ public class ReadParkingCSV {
 					}
 					
 					zipCodeData.fines.add(fine);
-					ZipCodeData.zipCodeMap.put(zipCode, zipCodeData);
+					OverallData.zipCodeMap.put(zipCode, zipCodeData);
 							
 				}    
 			}	

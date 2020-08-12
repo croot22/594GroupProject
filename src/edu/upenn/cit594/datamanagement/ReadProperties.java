@@ -6,9 +6,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import edu.upenn.cit594.data.OverallData;
 import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.logging.Logging;
 
@@ -47,7 +45,7 @@ public class ReadProperties {
 			String firstLine[] = firstLineRow.split(",");
 			int zipCodeColumn = 0, livableAreaColumn = 0, marketValueColumn = 0;
 			int marketValue = 0, livableArea = 0;
-			ZipCodeData zip = ZipCodeData.zipCodeMap.get(zipCode);
+			ZipCodeData zip = OverallData.zipCodeMap.get(zipCode);
 			
 			/*
 			 * Identify columns with relevant variables

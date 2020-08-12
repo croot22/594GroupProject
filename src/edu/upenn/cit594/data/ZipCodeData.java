@@ -24,8 +24,7 @@ public class ZipCodeData {
 	
 
 	
-	//HashMap to hold and memoize zipcode and related data
-	public static HashMap<Integer, ZipCodeData> zipCodeMap = new HashMap<Integer, ZipCodeData>();
+
 	
 }
 

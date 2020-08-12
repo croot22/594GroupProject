@@ -3,15 +3,13 @@ package edu.upenn.cit594.datamanagement;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.TreeMap;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import edu.upenn.cit594.data.OverallData;
 import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.logging.Logging;
 
@@ -25,7 +23,7 @@ public class ReadParkingJson {
 	}
 	
 	public void readJsonFile() {
-		TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>();
+		
 		File parkingList = new File(parkingFileName);
 		
 		/*
@@ -49,7 +47,7 @@ public class ReadParkingJson {
 		try {
 			objects = (JSONArray)parser.parse(new FileReader(parkingFileName));
 		} catch (IOException | ParseException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		// use an iterator to iterate over each element of the array
@@ -66,8 +64,8 @@ public class ReadParkingJson {
 				
 				//create zip object if not already created, and add fine
 				ZipCodeData zipData = new ZipCodeData();
-				if(ZipCodeData.zipCodeMap.containsKey(zipCode)) {
-					zipData = ZipCodeData.zipCodeMap.get(zipCode);
+				if(OverallData.zipCodeMap.containsKey(zipCode)) {
+					zipData = OverallData.zipCodeMap.get(zipCode);
 				}
 				zipData.fines.add(fine);
 			} 
