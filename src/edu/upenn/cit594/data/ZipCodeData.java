@@ -19,9 +19,5 @@ public class ZipCodeData {
 	public double marketValuePerCapita = 0;
 	public double marketValuePerFinePerCapita = 0;
 	
-
-	
-
-	
 }
 
