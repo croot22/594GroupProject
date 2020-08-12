@@ -1,17 +1,10 @@
 package edu.upenn.cit594.processor;
 
-import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.TreeMap;
-
 import edu.upenn.cit594.data.OverallData;
 import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.datamanagement.ReadPopulationFile;
 import edu.upenn.cit594.datamanagement.ReadProperties;
-import edu.upenn.cit594.ui.UserInterface;
 
 public class Questions {
 
@@ -22,9 +15,10 @@ public class Questions {
 	 * If not, then perform file reading and memoization
 	 */
 	ZipCodeData zipData = new ZipCodeData();
+	ReadProperties rp = new ReadProperties();
+	FileDecision fd = new FileDecision();
+	ReadPopulationFile rpf = new ReadPopulationFile();
 	
-
-
 	public void q1TotalPopulation(String populationFileName) {
 		if (OverallData.totalPopulation == 0) {
 			totalPop(populationFileName);
@@ -35,7 +29,7 @@ public class Questions {
 
 	public void q2TotalFinesPerCapita(String fileType, String parkingFileName, 
 			String populationFileName) {
-		FileDecision fd = new FileDecision();
+		
 		DecimalFormat decForm = new DecimalFormat("##.##");
 
 		/*
@@ -53,32 +47,32 @@ public class Questions {
 
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 
-				ZipCodeData zip = OverallData.zipCodeMap.get(zipCode);
-				zip.totalFines = ZipCodeProcessor.fineTotal(zipCode);
+				zipData = OverallData.zipCodeMap.get(zipCode);
+				zipData.totalFines = ZipCodeProcessor.fineTotal(zipCode);
 
 			}
 		}
 		if (OverallData.averageFinesPerCapitaStored == false) {
 
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
-				ZipCodeData zip = OverallData.zipCodeMap.get(zipCode);
-				zip.totalFinesPerCapita = ZipCodeProcessor.averageFinePerCapita(zipCode);
+				zipData = OverallData.zipCodeMap.get(zipCode);
+				zipData.totalFinesPerCapita = ZipCodeProcessor.averageFinePerCapita(zipCode);
 				System.out.println(zipCode + " $" + 
-						decForm.format(zip.totalFinesPerCapita));
+						decForm.format(zipData.totalFinesPerCapita));
 			}
 		}
 		else {
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
-				ZipCodeData zip = OverallData.zipCodeMap.get(zipCode);
+				zipData = OverallData.zipCodeMap.get(zipCode);
 				System.out.println(zipCode + " $" + 
-						decForm.format(zip.totalFinesPerCapita));
+						decForm.format(zipData.totalFinesPerCapita));
 			}
 		}
 	}
 
 	private void totalPop(String populationFileName) {
-		ReadPopulationFile readPopulationFile = new ReadPopulationFile();
-		readPopulationFile.readPopulationFile(populationFileName);
+		
+		rpf.readPopulationFile(populationFileName);
 		OverallData.totalPopulation = ZipCodeProcessor.populationTotal();
 	}
 
@@ -96,10 +90,10 @@ public class Questions {
 	 * to decrease repetition
 	 */
 	public void q3AverageMarketValue(String propertiesFileName, int zip) {
-		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
+		zipData = OverallData.zipCodeMap.get(zip);
 		
 		if (zipData.marketValue == null) {
-			ReadProperties rp = new ReadProperties();
+			
 			rp.readProperties(5, propertiesFileName, zip);
 		}	
 		
@@ -114,10 +108,10 @@ public class Questions {
 	}
 
 	public void q4AverageLivableArea(String propertiesFileName, int zip) {
-		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
+		zipData = OverallData.zipCodeMap.get(zip);
 		
 		if (zipData.marketValue == null) {
-			ReadProperties rp = new ReadProperties();
+
 			rp.readProperties(5, propertiesFileName, zip);
 		}	
 		if (zipData.totalLivableArea == 0) {
@@ -132,12 +126,12 @@ public class Questions {
 
 	public void q5TotalMarketValuePerCapita(String propertiesFileName, 
 			String populationFileName, int zip) {
-		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
+		zipData = OverallData.zipCodeMap.get(zip);
 		
 		if (zipData.marketValuePerCapita == 0) {
 			if (zipData.totalMarketValue == 0) {
 				if (zipData.marketValue == null) {
-					ReadProperties rp = new ReadProperties();
+					
 					rp.readProperties(5, propertiesFileName, zip);
 				}
 				zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
@@ -153,13 +147,13 @@ public class Questions {
 		Math.round(zipData.marketValuePerCapita));
 	}
 
-	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, String propertiesFileName, 
-			String populationFileName, String parkingFileName, int zip) {
-		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
+	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, 
+			String propertiesFileName, String populationFileName, String parkingFileName, int zip) {
+		zipData = OverallData.zipCodeMap.get(zip);
 		if (zipData.marketValuePerFinePerCapita == 0) {
 			if (zipData.totalMarketValue == 0) {
 				if (zipData.marketValue == null) {
-					ReadProperties rp = new ReadProperties();
+					
 					rp.readProperties(5, propertiesFileName, zip);
 					
 				}
@@ -171,8 +165,8 @@ public class Questions {
 			    
 			}
 			if (zipData.totalFinesPerCapita == 0) {
-				FileDecision fd = new FileDecision();
 				
+				fd.fileDecision(parkingFileType, parkingFileName);
 			}
 			zipData.marketValuePerFinePerCapita = ZipCodeProcessor.marketValuePerFinesPerCapita();
 			
