@@ -80,13 +80,19 @@ public class ZipCodeProcessor {
 	}
 	
 	public double marketValuePerCapita(int zip) {
+		double marketValuePerCapita = 0;
 		
+		zipData = OverallData.zipCodeMap.get(zip);
+		marketValuePerCapita = zipData.totalMarketValue / zipData.population;
 		
-		return 0;
+		return marketValuePerCapita;
 	}
 	
 	public double marketValuePerFinesPerCapita(int zip) {
+		double marketValuePerCapita = marketValuePerCapita(zip);
+		double finesPerCapita = averageFinePerCapita(zip);
+		double marketValuePerFinesPerCapita = finesPerCapita / marketValuePerCapita; 
 		
-		return 0;
+		return marketValuePerFinesPerCapita;
 	}
 }
