@@ -1,7 +1,5 @@
 package edu.upenn.cit594.main;
 
-import java.io.IOException;
-
 import edu.upenn.cit594.logging.Logging;
 import edu.upenn.cit594.ui.UserInterface;
 
@@ -13,7 +11,7 @@ public class Main {
 	public static String populationFileName;
 	public static String logFileName;
 	
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[]) {
 
 		if (args.length != 5) {
 			System.out.println("Error incorrect number of arguments");
