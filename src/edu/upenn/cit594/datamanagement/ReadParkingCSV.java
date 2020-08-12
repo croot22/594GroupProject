@@ -24,7 +24,7 @@ public class ReadParkingCSV {
 	 */
 
 
-	public TreeMap<Integer, Integer> readCsvFile() {
+	public void readCsvFile() {
 		File parkingList = new File(parkingFileName);
 		TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>();
 		Scanner scanner;
@@ -67,23 +67,16 @@ public class ReadParkingCSV {
 					
 					zipCodeData.fines.add(fine);
 					ZipCode.zipCodeMap.put(zipCode, zipCodeData);
-					
-					if (fines.containsKey(zipCode)) {      //@Cayde should the sum totaling be moved to processor?  
-						int totalfine = fines.get(zipCode) + fine;
-						fines.put(zipCode, totalfine);
-					}
-					else {
-						fines.put(zipCode, fine);
-					}			
+							
 				}    
 			}	
 			scanner.close();
 
 		} catch (FileNotFoundException e) {
-			return fines;
+		System.out.println("The selected file could not be found.");
+		
 		}
 
-		return fines;
 	}
 
 }
