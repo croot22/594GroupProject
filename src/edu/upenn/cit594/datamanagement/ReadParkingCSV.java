@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import edu.upenn.cit594.data.ZipCode;
 import edu.upenn.cit594.logging.Logging;
 
 
@@ -41,7 +42,7 @@ public class ReadParkingCSV {
 				System.out.println("Error text file does not exist or can not be read");
 				System.exit(0);
 			}
-			
+
 			Logging logger = Logging.getInstance();
 			String currentTime = logger.getCurrentTime();
 			String logMessage = currentTime +" "+ parkingFileName;
@@ -53,6 +54,20 @@ public class ReadParkingCSV {
 				if (dataValue.length == 7) {
 					int fine = Integer.parseInt(dataValue[1]);
 					int zipCode = Integer.parseInt(dataValue[6]);
+					ZipCode zipCodeData = new ZipCode();
+					//checking static map to see if zipcode is already memoized
+					if(ZipCode.zipCodeMap.containsKey(zipCode)) {
+						zipCodeData = ZipCode.zipCodeMap.get(zipCode);
+						
+					}
+					else {
+						 zipCodeData.zipCode = zipCode;
+						 
+					}
+					
+					zipCodeData.fines.add(fine);
+					ZipCode.zipCodeMap.put(zipCode, zipCodeData);
+					
 					if (fines.containsKey(zipCode)) {      //@Cayde should the sum totaling be moved to processor?  
 						int totalfine = fines.get(zipCode) + fine;
 						fines.put(zipCode, totalfine);
