@@ -32,7 +32,7 @@ public class FileDecision {
 			System.out.println("Error, not text or json file");
 			System.exit(0);
 		}
-
+		OverallData.finesStored = true;
 	}
 	
 }

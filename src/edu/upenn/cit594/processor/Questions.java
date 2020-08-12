@@ -14,76 +14,88 @@ import edu.upenn.cit594.datamanagement.ReadProperties;
 import edu.upenn.cit594.ui.UserInterface;
 
 public class Questions {
-	
+
 	/*
 	 * Create static maps for memoization
 	 * Many maps for many possible future uses
 	 * Repeated method is check if already memoized,
 	 * If not, then perform file reading and memoization
 	 */
-	
 
-	
+
+
 	public void q1TotalPopulation(String populationFileName) {
 		if (OverallData.totalPopulation == 0) {
-			totalPop();
+			totalPop(populationFileName);
 		}
 
 		System.out.println(OverallData.totalPopulation);
 	}
 
-	public void q2TotalFinesPerCapita(String fileType, String parkingFileName, String populationFileName) {
+	public void q2TotalFinesPerCapita(String fileType, String parkingFileName, 
+			String populationFileName) {
 		FileDecision fd = new FileDecision();
-		
+		DecimalFormat decForm = new DecimalFormat("##.##");
+
 		/*
 		 * If not already stored or memoized, obtain
 		 * Otherwise use stored information
 		 */
-		
+
 		if (OverallData.totalPopulation == 0) {
-			ReadPopulationFile readPopulationFile = new ReadPopulationFile();
-			readPopulationFile.readPopulationFile(populationFileName);
-			OverallData.totalPopulation = ZipCodeProcessor.populationTotal();
+			totalPop(populationFileName);
 		}
-		if (OverallData.averageFinesPerCapitaStored == false) {
+		if (OverallData.finesStored == false) {
 			fd.fileDecision(fileType, parkingFileName);
 		}
-		for (Integer zipCode : fines.keySet()) {
+		if (OverallData.totalFinesStored == false){
+
+			for (Integer zipCode : ZipCodeData.zipCodeMap.keySet()) {
+
+				ZipCodeData zip = ZipCodeData.zipCodeMap.get(zipCode);
+				zip.totalFines = ZipCodeProcessor.fineTotal(zipCode);
+
+			}
+		}
+		if (OverallData.averageFinesPerCapitaStored == false) {
 			
-			/*
-			 * checking the finesPerCapita hashmap for already having solution
-			 */
-			
-			if ((fines.get(zipCode) != null) && populations.get(zipCode) != null) {
-				double avgFinePerCap = (double) fines.get(zipCode) / (double) populations.get(zipCode);
-				finesPerCapitas.put(zipCode, avgFinePerCap);    //Memoize if not already stored
-				DecimalFormat decForm = new DecimalFormat("##.##");
-				System.out.println(zipCode + " $" + decForm.format(avgFinePerCap));
+			for (Integer zipCode : ZipCodeData.zipCodeMap.keySet()) {
+				ZipCodeData zip = ZipCodeData.zipCodeMap.get(zipCode);
+				zip.totalFinesPerCapita = ZipCodeProcessor.averageFinePerCapita(zipCode);
+				System.out.println(zipCode + " $" + 
+						decForm.format(zip.totalFinesPerCapita));
+			}
+		}
+		else {
+			for (Integer zipCode : ZipCodeData.zipCodeMap.keySet()) {
+				ZipCodeData zip = ZipCodeData.zipCodeMap.get(zipCode);
+				System.out.println(zipCode + " $" + 
+						decForm.format(zip.totalFinesPerCapita));
 			}
 		}
 	}
-	
-	private void totalPop() {
+
+	private void totalPop(String populationFileName) {
 		ReadPopulationFile readPopulationFile = new ReadPopulationFile();
 		readPopulationFile.readPopulationFile(populationFileName);
 		OverallData.totalPopulation = ZipCodeProcessor.populationTotal();
 	}
-	
-	
+
+
 	/*
 	 * If not already stored or memoized, obtain
 	 * Note do not assume if we have market values for a zip
 	 * code already have total.  This allows for increased modularity
 	 * if there were other prompts regarding the market values.
 	 */
-	
-	
+
+
 	/*  @Cayde
 	 * Use strategy design pattern and/or separate methods
 	 * to decrease repetition
 	 */
 	public void q3AverageMarketValue(String propertiesFileName, int zip) {
-		
+
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();  //all the market values for a zip code
 		if (marketValues.containsKey(zip) == false) {
 			ReadProperties readProperties = new ReadProperties();
@@ -104,7 +116,7 @@ public class Questions {
 		}
 		System.out.println("Average Market value for " + zip + " is " + Math.round(averageMarketValues.get(zip)));
 	}
-	
+
 	public void q4AverageLivableArea(String propertiesFileName, int zip) {
 
 		ArrayList<Integer> livableAreaList = new ArrayList<Integer>();
@@ -127,10 +139,10 @@ public class Questions {
 		}
 		System.out.println("Average livable area for " + zip + " is " + Math.round(averageLivableAreas.get(zip)));
 	}
-	
+
 	public void q5TotalMarketValuePerCapita(String propertiesFileName, 
 			String populationFileName, int zip) {
-		
+
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();
 		if (marketPerCapitas.containsKey(zip) == false) {
 			if (totalMarketValues.containsKey(zip) == false) {
@@ -150,14 +162,14 @@ public class Questions {
 				populations = rpf.readPopulationFile(populationFileName);
 			}
 			double marketPerCapita = (double) totalMarketValues.get(zip) / 
-				(double) populations.get(zip);
+					(double) populations.get(zip);
 			marketPerCapitas.put(zip, marketPerCapita);					//Memoize if not already stored
 		}
 		System.out.println("Total Market Value per Capital for " + zip + " is " + Math.round(marketPerCapitas.get(zip)));
 	}
-	
+
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, String propertiesFileName, 
-		String populationFileName, String parkingFileName, int zip) {
+			String populationFileName, String parkingFileName, int zip) {
 
 		ArrayList<Integer> marketValueList = new ArrayList<Integer>();
 		if (marketPerFinePerCapitas.containsKey(zip) == false) {
@@ -182,11 +194,11 @@ public class Questions {
 				fines = fd.fileDecision(parkingFileType, parkingFileName);	//Memoize if not already stored
 			}
 			double marketPerFinePerCapita = ((double) totalMarketValues.get(zip) / (double) fines.get(zip)) /
-				(double) populations.get(zip);
+					(double) populations.get(zip);
 			marketPerFinePerCapitas.put(zip, marketPerFinePerCapita);//Memoize if not already stored
 		}
 		System.out.println(Math.round(marketPerFinePerCapitas.get(zip)));
 	}
-	
+
 
 }

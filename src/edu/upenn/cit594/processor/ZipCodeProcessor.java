@@ -1,5 +1,7 @@
 package edu.upenn.cit594.processor;
 
+import java.text.DecimalFormat;
+
 import edu.upenn.cit594.data.OverallData;
 import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.datamanagement.ReadPopulationFile;
@@ -14,8 +16,7 @@ public class ZipCodeProcessor {
 				totalFines += fine;
 			}
 		}
-		// show memoization of totalFines
-		OverallData.totalFinesStored = true;
+
 		return totalFines;
 	}
 	
@@ -29,6 +30,14 @@ public class ZipCodeProcessor {
 		return totalPopulation;
 	}
 	
+	public static double averageFinePerCapita(int zip) {
+		int avgFine = 0;
+	
+		ZipCodeData zipCode = ZipCodeData.zipCodeMap.get(zip);
+		avgFine = zipCode.totalFines / zipCode.population;
+
+		return avgFine;
+	}
 	
 	
 	
