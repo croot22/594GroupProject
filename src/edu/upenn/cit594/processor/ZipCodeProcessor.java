@@ -5,11 +5,14 @@ import edu.upenn.cit594.data.ZipCodeData;
 
 public class ZipCodeProcessor {
 
+	
+	ZipCodeData zipData = new ZipCodeData();
+	
 	public int fineTotal(int zipCode) {
 		int totalFines = 0;
 		if (OverallData.zipCodeMap.containsKey(zipCode)) {  
-			ZipCodeData zipMap = OverallData.zipCodeMap.get(zipCode);
-			for(int fine: zipMap.fines) {
+			zipData = OverallData.zipCodeMap.get(zipCode);
+			for(int fine: zipData.fines) {
 				totalFines += fine;
 			}
 		}
@@ -21,8 +24,8 @@ public class ZipCodeProcessor {
 		int totalPopulation = 0;
 		for(Integer zip: OverallData.zipCodeMap.keySet()) {
 			
-			ZipCodeData zipMap = OverallData.zipCodeMap.get(zip);
-			totalPopulation += zipMap.population;
+			zipData = OverallData.zipCodeMap.get(zip);
+			totalPopulation += zipData.population;
 		}
 		return totalPopulation;
 	}
@@ -30,8 +33,8 @@ public class ZipCodeProcessor {
 	public double averageFinePerCapita(int zip) {
 		int avgFine = 0;
 	
-		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
-		avgFine = zipCode.totalFines / zipCode.population;
+		zipData = OverallData.zipCodeMap.get(zip);
+		avgFine = zipData.totalFines / zipData.population;
 
 		return avgFine;
 	}
@@ -39,8 +42,8 @@ public class ZipCodeProcessor {
 	public double totalMarketValue(int zip) {
 		double totalMarketValue = 0;
 		
-		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
-		for(double value: zipCode.marketValue) {
+		zipData = OverallData.zipCodeMap.get(zip);
+		for(double value: zipData.marketValue) {
 			totalMarketValue += value;
 		}
 		
@@ -50,8 +53,8 @@ public class ZipCodeProcessor {
 	public double totalLivableAreas(int zip) {
 		double totalLivableAreas = 0;
 		
-		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
-		for(double value: zipCode.livableArea) {
+		zipData = OverallData.zipCodeMap.get(zip);
+		for(double value: zipData.livableArea) {
 			totalLivableAreas += value;
 		}
 		
@@ -61,8 +64,8 @@ public class ZipCodeProcessor {
 	public double averageMarketValue(int zip) {
 		double averageMarketValue = 0;
 		
-		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
-		averageMarketValue = zipCode.totalMarketValue / zipCode.households;
+		zipData = OverallData.zipCodeMap.get(zip);
+		averageMarketValue = zipData.totalMarketValue / zipData.households;
 		
 		return averageMarketValue;
 	}
@@ -70,17 +73,20 @@ public class ZipCodeProcessor {
 	public double averageLivableArea(int zip) {
 		double averageLivableArea = 0;
 		
-		ZipCodeData zipCode = OverallData.zipCodeMap.get(zip);
-		averageLivableArea = zipCode.totalLivableArea / zipCode.households;
+		zipData = OverallData.zipCodeMap.get(zip);
+		averageLivableArea = zipData.totalLivableArea / zipData.households;
 		
 		return averageLivableArea;
 	}
 	
-	public double marketValuePerCapita() {
+	public double marketValuePerCapita(int zip) {
+		
+		
 		return 0;
 	}
 	
-	public double marketValuePerFinesPerCapita() {
+	public double marketValuePerFinesPerCapita(int zip) {
+		
 		return 0;
 	}
 }
