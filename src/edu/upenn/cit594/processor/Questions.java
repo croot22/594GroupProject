@@ -26,9 +26,7 @@ public class Questions {
 	
 	public void q1TotalPopulation(String populationFileName) {
 		if (OverallData.totalPopulation == 0) {
-			ReadPopulationFile readPopulationFile = new ReadPopulationFile();
-			readPopulationFile.readPopulationFile(populationFileName);
-			OverallData.totalPopulation = ZipCodeProcessor.populationTotal();
+			totalPop();
 		}
 
 		System.out.println(OverallData.totalPopulation);
@@ -45,9 +43,10 @@ public class Questions {
 		if (OverallData.totalPopulation == 0) {
 			ReadPopulationFile readPopulationFile = new ReadPopulationFile();
 			readPopulationFile.readPopulationFile(populationFileName);
+			OverallData.totalPopulation = ZipCodeProcessor.populationTotal();
 		}
-		if (finesPerCapitas.isEmpty()) {
-			fines = fd.fileDecision(fileType, parkingFileName);
+		if (OverallData.averageFinesPerCapitaStored == false) {
+			fd.fileDecision(fileType, parkingFileName);
 		}
 		for (Integer zipCode : fines.keySet()) {
 			
@@ -63,6 +62,13 @@ public class Questions {
 			}
 		}
 	}
+	
+	private void totalPop() {
+		ReadPopulationFile readPopulationFile = new ReadPopulationFile();
+		readPopulationFile.readPopulationFile(populationFileName);
+		OverallData.totalPopulation = ZipCodeProcessor.populationTotal();
+	}
+	
 	
 	/*
 	 * If not already stored or memoized, obtain
