@@ -42,6 +42,7 @@ public class Questions {
 		}
 		if (OverallData.finesStored == false) {
 			fd.fileDecision(fileType, parkingFileName);
+			OverallData.finesStored = true;
 		}
 		if (OverallData.totalFinesStored == false){
 
@@ -49,8 +50,9 @@ public class Questions {
 
 				zipData = OverallData.zipCodeMap.get(zipCode);
 				zipData.totalFines = zipProcessor.fineTotal(zipCode);
-
+				
 			}
+			OverallData.totalFinesStored = true;
 		}
 		if (OverallData.averageFinesPerCapitaStored == false) {
 
@@ -60,6 +62,7 @@ public class Questions {
 				System.out.println(zipCode + " $" + 
 						decForm.format(zipData.totalFinesPerCapita));
 			}
+			OverallData.averageFinesPerCapitaStored = true;
 		}
 		else {
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
@@ -85,10 +88,6 @@ public class Questions {
 	 */
 
 
-	/*  @Cayde
-	 * Use strategy design pattern and/or separate methods
-	 * to decrease repetition
-	 */
 	public void q3AverageMarketValue(String propertiesFileName, int zip) {
 		AverageMarketValueProcessor amvp = new AverageMarketValueProcessor();
 		double averageMarketValue = amvp.getAverage(propertiesFileName, zip);
@@ -122,13 +121,15 @@ public class Questions {
 			zipData.marketValuePerCapita = zipProcessor.marketValuePerCapita(zip);
 
 		}
-		System.out.println("Total Market Value per Capital for " + zip + " is " + 
+		System.out.println("Total Market Value per Capita for " + zip + " is " + 
 				Math.round(zipData.marketValuePerCapita));
 	}
 
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, 
 			String propertiesFileName, String populationFileName, String parkingFileName, int zip) {
 		zipData = OverallData.zipCodeMap.get(zip);
+		DecimalFormat decForm = new DecimalFormat("##.##");
+		
 		if (zipData.marketValuePerFinePerCapita == 0) {
 			if (zipData.totalMarketValue == 0) {
 				if (zipData.marketValue == null) {
@@ -143,10 +144,28 @@ public class Questions {
 				totalPop(populationFileName);
 
 			}
-			if (zipData.totalFinesPerCapita == 0) {
+			if (OverallData.averageFinesPerCapitaStored == false) {
+				if(OverallData.totalFinesStored == false) {
+					if(OverallData.finesStored == false) {
+						fd.fileDecision(parkingFileType, parkingFileName);
+					}
+					for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 
-				fd.fileDecision(parkingFileType, parkingFileName);
+						zipData = OverallData.zipCodeMap.get(zipCode);
+						zipData.totalFines = zipProcessor.fineTotal(zipCode);
+						
+					}
+					OverallData.totalFinesStored = true;
+				}
+
+				for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
+					zipData = OverallData.zipCodeMap.get(zipCode);
+					zipData.totalFinesPerCapita = zipProcessor.averageFinePerCapita(zipCode);
+
+				}
+				OverallData.averageFinesPerCapitaStored = true;
 			}
+			
 			zipData.marketValuePerFinePerCapita = zipProcessor.marketValuePerFinesPerCapita(zip);
 
 		}
