@@ -27,13 +27,11 @@ public class Questions {
 	public void q1TotalPopulation(String populationFileName) {
 		if (OverallData.totalPopulation == 0) {
 			ReadPopulationFile readPopulationFile = new ReadPopulationFile();
-			populations = readPopulationFile.readPopulationFile(populationFileName);
+			readPopulationFile.readPopulationFile(populationFileName);
+			OverallData.totalPopulation = ZipCodeProcessor.populationTotal();
 		}
-		int totalPopulation = 0;
-		for (int population : populations.keySet()) {         //Simply totaling the individual populations
-			totalPopulation +=  populations.get(population);
-		}
-		System.out.println(totalPopulation);
+
+		System.out.println(OverallData.totalPopulation);
 	}
 
 	public void q2TotalFinesPerCapita(String fileType, String parkingFileName, String populationFileName) {
@@ -44,9 +42,9 @@ public class Questions {
 		 * Otherwise use stored information
 		 */
 		
-		if (populations.isEmpty()) {
+		if (OverallData.totalPopulation == 0) {
 			ReadPopulationFile readPopulationFile = new ReadPopulationFile();
-			populations = readPopulationFile.readPopulationFile(populationFileName);
+			readPopulationFile.readPopulationFile(populationFileName);
 		}
 		if (finesPerCapitas.isEmpty()) {
 			fines = fd.fileDecision(fileType, parkingFileName);

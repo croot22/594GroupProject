@@ -13,7 +13,7 @@ public class ZipCodeData {
 	public LinkedList<Integer> livableArea = new LinkedList<Integer>();
 	public LinkedList<Integer> marketValue = new LinkedList<Integer>();
 	public int totalFines = 0;
-	public double totalFinesPerCapit = 0;
+	public double totalFinesPerCapita = 0;
 	
 	
 

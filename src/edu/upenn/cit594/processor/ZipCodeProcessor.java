@@ -17,13 +17,13 @@ public class ZipCodeProcessor {
 		return totalFines;
 	}
 	
-	public static void populationTotal() {
+	public static int populationTotal() {
 		int totalPopulation = 0;
 		for(Integer zip: ZipCodeData.zipCodeMap.keySet()) {
 			
 			ZipCodeData zipMap = ZipCodeData.zipCodeMap.get(zip);
 			totalPopulation += zipMap.population;
 		}
-		OverallData.totalPopulation = totalPopulation;
+		return totalPopulation;
 	}
 }
