@@ -82,4 +82,8 @@ public class ZipCodeProcessor {
 	public static double marketValuePerCapita() {
 		return 0;
 	}
+	
+	public static double marketValuePerFinesPerCapita() {
+		return 0;
+	}
 }

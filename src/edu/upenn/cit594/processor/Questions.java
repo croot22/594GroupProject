@@ -155,34 +155,28 @@ public class Questions {
 
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, String propertiesFileName, 
 			String populationFileName, String parkingFileName, int zip) {
-
-		ArrayList<Integer> marketValueList = new ArrayList<Integer>();
-		if (marketPerFinePerCapitas.containsKey(zip) == false) {
-			if (totalMarketValues.containsKey(zip) == false) {
-				if (marketValues.containsKey(zip) == false) {
+		ZipCodeData zipData = ZipCodeData.zipCodeMap.get(zip);
+		if (zipData.marketValuePerFinePerCapita == 0) {
+			if (zipData.totalMarketValue == 0) {
+				if (zipData.marketValue == null) {
 					ReadProperties rp = new ReadProperties();
-					marketValueList = rp.readProperties(3, propertiesFileName, zip);
-					marketValues.put(zip, marketValueList);				//Memoize if not already stored
+					
 				}
-				double totalMarketValue = 0;
-				for (int marketValue: marketValues.get(zip)) {
-					totalMarketValue += marketValue;
-				}
-				totalMarketValues.put(zip, totalMarketValue);			//Memoize if not already stored
+				zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
+				
 			}
-			if (populations.containsKey(zip) == false) {
+			if (zipData.population == 0) {
 				ReadPopulationFile rpf = new ReadPopulationFile();
-				populations = rpf.readPopulationFile(populationFileName);	//Memoize if not already stored
+			    
 			}
-			if (finesPerCapitas.isEmpty()) {
+			if (zipData.totalFinesPerCapita == 0) {
 				FileDecision fd = new FileDecision();
-				fines = fd.fileDecision(parkingFileType, parkingFileName);	//Memoize if not already stored
+				
 			}
-			double marketPerFinePerCapita = ((double) totalMarketValues.get(zip) / (double) fines.get(zip)) /
-					(double) populations.get(zip);
-			marketPerFinePerCapitas.put(zip, marketPerFinePerCapita);//Memoize if not already stored
+			zipData.marketValuePerFinePerCapita = ZipCodeProcessor.marketValuePerFinesPerCapita();
+			
 		}
-		System.out.println(Math.round(marketPerFinePerCapitas.get(zip)));
+		System.out.println(Math.round(zipData.marketValuePerFinePerCapita));
 	}
 
 

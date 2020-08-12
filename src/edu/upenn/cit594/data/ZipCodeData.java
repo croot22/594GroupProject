@@ -20,7 +20,7 @@ public class ZipCodeData {
 	public double averageLivableArea = 0;
 	public int households = 0;
 	public double marketValuePerCapita = 0;
-	
+	public double marketValuePerFinePerCapita = 0;
 	
 
 	
