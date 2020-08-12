@@ -78,4 +78,8 @@ public class ZipCodeProcessor {
 		
 		return averageLivableArea;
 	}
+	
+	public static double marketValuePerCapita() {
+		return 0;
+	}
 }
