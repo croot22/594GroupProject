@@ -61,6 +61,11 @@ public class ZipCodeProcessor {
 		return totalLivableAreas;
 	}
 	
+	public double averageValue(double numerator, double denominator) {
+		double averageValue =  numerator / denominator;
+		
+		return averageValue;
+	}
 	public double averageMarketValue(int zip) {
 		double averageMarketValue = 0;
 		
