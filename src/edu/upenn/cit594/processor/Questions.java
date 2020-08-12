@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
+
+import edu.upenn.cit594.data.OverallData;
+import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.datamanagement.ReadPopulationFile;
 import edu.upenn.cit594.datamanagement.ReadProperties;
 import edu.upenn.cit594.ui.UserInterface;
@@ -19,20 +22,10 @@ public class Questions {
 	 * If not, then perform file reading and memoization
 	 */
 	
-	public static HashMap<Integer, Integer> populations = new HashMap<Integer, Integer>();
-	public static TreeMap<Integer, Integer> fines = new TreeMap<Integer, Integer>();
-	public static TreeMap<Integer, Double> finesPerCapitas = new TreeMap<Integer, Double>();
-	public static HashMap<Integer, ArrayList <Integer>> marketValues = new HashMap<Integer, ArrayList<Integer>>();
-	public static HashMap<Integer, ArrayList<Integer>> livableAreas = new HashMap<Integer, ArrayList<Integer>>();
-	public static HashMap<Integer, Double> totalMarketValues = new HashMap<Integer, Double>();
-	public static HashMap<Integer, Double> totalLivableAreas = new HashMap<Integer, Double>();
-	public static HashMap<Integer, Double> averageMarketValues = new HashMap<Integer, Double>();
-	public static HashMap<Integer, Double> averageLivableAreas = new HashMap<Integer, Double>();
-	public static HashMap<Integer, Double> marketPerCapitas = new HashMap<Integer, Double>();
-	public static HashMap<Integer, Double> marketPerFinePerCapitas = new HashMap<Integer, Double>();
+
 	
 	public void q1TotalPopulation(String populationFileName) {
-		if (populations.isEmpty()) {
+		if (OverallData.totalPopulation == 0) {
 			ReadPopulationFile readPopulationFile = new ReadPopulationFile();
 			populations = readPopulationFile.readPopulationFile(populationFileName);
 		}
@@ -190,4 +183,6 @@ public class Questions {
 		}
 		System.out.println(Math.round(marketPerFinePerCapitas.get(zip)));
 	}
+	
+
 }
