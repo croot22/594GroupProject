@@ -58,7 +58,7 @@ public class Questions {
 			}
 		}
 		if (OverallData.averageFinesPerCapitaStored == false) {
-			
+
 			for (Integer zipCode : ZipCodeData.zipCodeMap.keySet()) {
 				ZipCodeData zip = ZipCodeData.zipCodeMap.get(zipCode);
 				zip.totalFinesPerCapita = ZipCodeProcessor.averageFinePerCapita(zipCode);
@@ -95,26 +95,29 @@ public class Questions {
 	 * to decrease repetition
 	 */
 	public void q3AverageMarketValue(String propertiesFileName, int zip) {
-
-		ArrayList<Integer> marketValueList = new ArrayList<Integer>();  //all the market values for a zip code
-		if (marketValues.containsKey(zip) == false) {
+		ZipCodeData zipData = ZipCodeData.zipCodeMap.get(zip);
+		//		ArrayList<Integer> marketValueList = new ArrayList<Integer>();  //all the market values for a zip code
+		if (zipData.marketValue == null) {
 			ReadProperties readProperties = new ReadProperties();
-			marketValueList = readProperties.readProperties(3, propertiesFileName, zip);
-			marketValues.put(zip, marketValueList);  			//Memoize if not already stored
 		}	
-		if (totalMarketValues.containsKey(zip) == false) {   	//@Cayde this may be unnecessary step or previous may be
-			double totalMarketValue = 0; 						
-			for (int marketValue: marketValues.get(zip)) {
-				totalMarketValue += marketValue;
-			}
-			totalMarketValues.put(zip, totalMarketValue);  		//Memoize if not already stored
+		//		if (totalMarketValues.containsKey(zip) == false) {   	//@Cayde this may be unnecessary step or previous may be
+		//			double totalMarketValue = 0; 						
+		//			for (int marketValue: marketValues.get(zip)) {
+		//				totalMarketValue += marketValue;
+		//			}
+		//			totalMarketValues.put(zip, totalMarketValue);  		//Memoize if not already stored
+		//		}
+		if (zipData.totalMarketValue == 0) {
+			zipData.totalMarketValue = ZipCodeProcessor.totalMarketValue(zip);
 		}
-		if (averageMarketValues.containsKey(zip) == false) {
-			double averageMarketValue = (double) totalMarketValues.get(zip) /
-					(double) marketValues.get(zip).size();
-			averageMarketValues.put(zip, averageMarketValue);  	//Memoize if not already stored
+		if (zipData.totalLivableAreas == 0) {
+			zipData.totalLivableAreas = ZipCodeProcessor.totalLivableAreas(zip);
 		}
-		System.out.println("Average Market value for " + zip + " is " + Math.round(averageMarketValues.get(zip)));
+		if (zipData.averageMarketValue == 0) {
+			zipData.averageMarketValue = ZipCodeProcessor.averageMarketValue(zip);
+		}
+		System.out.println("Average Market value for " + zip + " is " + 
+				Math.round(zipData.averageMarketValue));
 	}
 
 	public void q4AverageLivableArea(String propertiesFileName, int zip) {

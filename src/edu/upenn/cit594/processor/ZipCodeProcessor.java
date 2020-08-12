@@ -39,6 +39,35 @@ public class ZipCodeProcessor {
 		return avgFine;
 	}
 	
+	public static double totalMarketValue(int zip) {
+		double totalMarketValue = 0;
+		
+		ZipCodeData zipCode = ZipCodeData.zipCodeMap.get(zip);
+		for(double value: zipCode.marketValue) {
+			totalMarketValue += value;
+		}
+		
+		return totalMarketValue;
+	}
 	
+	public static double totalLivableAreas(int zip) {
+		double totalLivableAreas = 0;
+		
+		ZipCodeData zipCode = ZipCodeData.zipCodeMap.get(zip);
+		for(double value: zipCode.livableArea) {
+			totalLivableAreas += value;
+		}
+		
+		return totalLivableAreas;
+	}
+	
+	public static double averageMarketValue(int zip) {
+		double averageMarketValue = 0;
+		
+		ZipCodeData zipCode = ZipCodeData.zipCodeMap.get(zip);
+		averageMarketValue = zipCode.totalMarketValue / zipCode.livableArea;
+		
+		return averageMarketValue;
+	}
 	
 }

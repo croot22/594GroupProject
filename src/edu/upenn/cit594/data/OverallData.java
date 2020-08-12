@@ -18,4 +18,5 @@ public class OverallData {
 	public static boolean finesStored = false;
 	public static boolean totalFinesStored = false;
 	public static boolean finesPerCapitaStored = false;
+
 }

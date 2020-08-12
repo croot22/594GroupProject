@@ -14,6 +14,9 @@ public class ZipCodeData {
 	public LinkedList<Integer> marketValue = new LinkedList<Integer>();
 	public int totalFines = 0;
 	public double totalFinesPerCapita = 0;
+	public double totalMarketValue = 0;
+	public double averageMarketValue = 0;
+	public double totalLivableAreas = 0;
 	
 	
 
