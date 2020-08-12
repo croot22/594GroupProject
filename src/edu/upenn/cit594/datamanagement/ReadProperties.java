@@ -9,11 +9,13 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.logging.Logging;
 
 public class ReadProperties {
 	
-	public ArrayList<Integer> readProperties(int selectedOption, String propertiesFileName, int zipCode) {
+	public void readProperties(int selectedOption, 
+			String propertiesFileName, int zipCode) {
 		
 		/*
 		 * If file does not exist or can not be read
@@ -24,6 +26,7 @@ public class ReadProperties {
 			System.exit(0);
 		}
 		
+		//log relevant info
 		Logging logger = Logging.getInstance();
 		String currentTime = logger.getCurrentTime();
 		String logMessage = currentTime +" "+ propertiesFileName;
@@ -32,13 +35,6 @@ public class ReadProperties {
 		/*
 		 * File readers that improve efficiency
 		 */
-
-		int livableArea = 0, marketValue = 0;
-		ArrayList<Integer> marketValues = new ArrayList<Integer>();
-		ArrayList<Integer> livableAreas = new ArrayList<Integer>();
-		HashMap<Integer, ArrayList<Integer>> allMarketValues = new HashMap<Integer, ArrayList<Integer>>();
-		HashMap<Integer, ArrayList<Integer>> allLivableAreas = new HashMap<Integer, ArrayList<Integer>>();
-		
 		
 		try {
 			FileInputStream fileInputStream = new FileInputStream(propertiesFileName);
@@ -50,6 +46,8 @@ public class ReadProperties {
 			String nextLine;
 			String firstLine[] = firstLineRow.split(",");
 			int zipCodeColumn = 0, livableAreaColumn = 0, marketValueColumn = 0;
+			int marketValue = 0, livableArea = 0;
+			ZipCodeData zip = ZipCodeData.zipCodeMap.get(zipCode);
 			
 			/*
 			 * Identify columns with relevant variables
@@ -91,29 +89,31 @@ public class ReadProperties {
 						((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
 						if (isNumeric(line[livableAreaColumn])) {
 							livableArea = (int) Double.parseDouble(line[livableAreaColumn]);
-							livableAreas.add(livableArea);
+							zip.livableArea.add(livableArea);
 						}
 					} 
 				} 
-				return livableAreas;
+
 			}
 			
 			/*
 			 * If Option 3,5,or 6 store relevant market values for separate processing
 			 */
 			
-			else if ((selectedOption == 3) || (selectedOption == 5) || (selectedOption == 6)) {
+			else if ((selectedOption == 3) || (selectedOption > 4)) {
 				while((nextLine = reader.readLine()) != null) {  
 					String[] line = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
 					if ((line[zipCodeColumn].length() > 5) && 
 						((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
 						if (isNumeric(line[marketValueColumn])) {
 							marketValue = (int) Double.parseDouble(line[marketValueColumn]);
-							marketValues.add(marketValue);
+
+							zip.marketValue.add(marketValue);
+							
 						}
 					}
 				}
-				return marketValues;
+
 			}	
 			reader.close();
 		} catch (FileNotFoundException e) {
@@ -124,7 +124,7 @@ public class ReadProperties {
 			e.printStackTrace();
 		}
 
-		return marketValues;
+
 	}
 	
 	/*
