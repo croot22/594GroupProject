@@ -32,9 +32,9 @@ public class UserInterface {
 		
 		try {
 			selectedOption = scanner.nextInt();
-			while (selectedOption > 6 || selectedOption < 0) {
-				System.out.println("Please input a number corresponding to one of the options.");
-				selectedOption = scanner.nextInt();
+			if (selectedOption > 6 || selectedOption < 0) {
+				System.out.println("Number input is outside of range (0-6).");
+				System.exit(0);
 			}
 		} catch(InputMismatchException e) {
 			System.out.println("Please input a number corresponding to one of the options.");
