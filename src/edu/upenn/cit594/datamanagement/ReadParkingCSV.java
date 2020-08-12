@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-import edu.upenn.cit594.data.ZipCode;
+import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.logging.Logging;
 
 
@@ -54,10 +54,10 @@ public class ReadParkingCSV {
 				if (dataValue.length == 7) {
 					int fine = Integer.parseInt(dataValue[1]);
 					int zipCode = Integer.parseInt(dataValue[6]);
-					ZipCode zipCodeData = new ZipCode();
+					ZipCodeData zipCodeData = new ZipCodeData();
 					//checking static map to see if zipcode is already memoized
-					if(ZipCode.zipCodeMap.containsKey(zipCode)) {
-						zipCodeData = ZipCode.zipCodeMap.get(zipCode);
+					if(ZipCodeData.zipCodeMap.containsKey(zipCode)) {
+						zipCodeData = ZipCodeData.zipCodeMap.get(zipCode);
 						
 					}
 					else {
@@ -66,7 +66,7 @@ public class ReadParkingCSV {
 					}
 					
 					zipCodeData.fines.add(fine);
-					ZipCode.zipCodeMap.put(zipCode, zipCodeData);
+					ZipCodeData.zipCodeMap.put(zipCode, zipCodeData);
 							
 				}    
 			}	
