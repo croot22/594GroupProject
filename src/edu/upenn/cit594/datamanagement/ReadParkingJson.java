@@ -62,13 +62,7 @@ public class ReadParkingJson {
 				long longFine = (long) object.get("fine");
 				int fine = (int) longFine;    
 				int zipCode = Integer.parseInt(stringZipCode);
-				if (fines.containsKey(zipCode)) {       //@Cayde should this be in processor?
-					int totalfine = fines.get(zipCode) + fine;
-					fines.put(zipCode, totalfine);
-				}
-				else {
-					fines.put(zipCode, fine);
-				}	
+				
 			} 
 		}
 		//for (int zipcode : fines.keySet()) {
