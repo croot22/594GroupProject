@@ -2,6 +2,7 @@ package edu.upenn.cit594.logging;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import edu.upenn.cit594.main.Main;
@@ -23,12 +24,14 @@ public class Logging {
 		try {
 			
 			File logFile = new File(fileName);
-			ArgumentsProcessor am = new ArgumentsProcessor();
-			if (!am.checkValidFile(fileName)) {
-				logFile.createNewFile();
-
+			if ( logFile.exists() && !logFile.isDirectory() ) {
+			    this.out = new PrintWriter(new FileOutputStream(new File(fileName), true));
 			}
-			out = new PrintWriter(logFile);
+			else {
+			    this.out = new PrintWriter(logFile);
+			}
+			
+
 			
 		} catch (FileNotFoundException e) {
 
