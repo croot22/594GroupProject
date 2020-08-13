@@ -5,8 +5,8 @@ import java.io.File;
 public class ArgumentsProcessor {
 
 	public void checkValidType(String fileType) {
-		if(!fileType.equals("json") && !fileType.equals("text")){
-			System.out.println("The file format is neither \"json\" nor \"text.\"");
+		if(!fileType.equals("json") && !fileType.equals("csv")){
+			System.out.println("The file format is neither \"json\" nor \"csv.\"");
 			System.exit(0);
 		}
 	}
