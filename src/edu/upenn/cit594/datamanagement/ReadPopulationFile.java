@@ -17,15 +17,6 @@ public class ReadPopulationFile {
 		try {
 			scanner = new Scanner(populationList);
 			
-			/*
-			 * If text file does not exist or can not be read
-			 */
-			
-			if ((populationList.canRead()) && (populationList.exists()) == false) {
-				System.out.println("Error text file does not exist or can not be read");
-				System.exit(0);
-			}
-			
 			
 			Logging logger = Logging.getInstance();
 			String currentTime = logger.getCurrentTime();

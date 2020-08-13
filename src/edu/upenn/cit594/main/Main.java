@@ -1,6 +1,7 @@
 package edu.upenn.cit594.main;
 
 import edu.upenn.cit594.logging.Logging;
+import edu.upenn.cit594.processor.ArgumentsProcessor;
 import edu.upenn.cit594.ui.UserInterface;
 
 public class Main {
@@ -22,11 +23,21 @@ public class Main {
 		 * Store arguments in static variables
 		 */
 		
-		Main.fileType = args[0];
+		Main.fileType = args[0].toLowerCase();
 		Main.parkingFileName = args[1];
 		Main.propertiesFileName = args[2];	
 		Main.populationFileName = args[3];
 		Main.logFileName = args[4];
+		
+		ArgumentsProcessor am = new ArgumentsProcessor();
+		am.checkValidType(Main.fileType);
+		
+		if (!am.checkValidFile(Main.parkingFileName) || !am.checkValidFile(Main.propertiesFileName) || 
+				!am.checkValidFile(Main.populationFileName)) {
+			System.out.println("Error JSON file does not exist or can not be read");
+			System.exit(0);
+		}
+		
 		
 		/*
 		 * log current time at start of program

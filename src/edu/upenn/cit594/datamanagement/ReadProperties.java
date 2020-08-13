@@ -11,34 +11,26 @@ import edu.upenn.cit594.data.ZipCodeData;
 import edu.upenn.cit594.logging.Logging;
 
 public class ReadProperties {
-	
+
 	public void readProperties(int selectedOption, 
 			String propertiesFileName, int zipCode) {
-		
-		/*
-		 * If file does not exist or can not be read
-		 */
-		File checkFile = new File(propertiesFileName);
-		if ((checkFile.canRead()) && (checkFile.exists()) == false) {
-			System.out.println("Error text file does not exist or can not be read");
-			System.exit(0);
-		}
-		
+
+
 		//log relevant info
 		Logging logger = Logging.getInstance();
 		String currentTime = logger.getCurrentTime();
 		String logMessage = currentTime +" "+ propertiesFileName;
 		logger.log(logMessage);
-		
+
 		/*
 		 * File readers that improve efficiency
 		 */
-		
+
 		try {
 			FileInputStream fileInputStream = new FileInputStream(propertiesFileName);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
-			
-			
+
+
 			String firstLineRow = " ";
 			firstLineRow = reader.readLine();
 			String nextLine;
@@ -46,11 +38,11 @@ public class ReadProperties {
 			int zipCodeColumn = 0, livableAreaColumn = 0, marketValueColumn = 0;
 			int marketValue = 0, livableArea = 0;
 			ZipCodeData zip = OverallData.zipCodeMap.get(zipCode);
-			
+
 			/*
 			 * Identify columns with relevant variables
 			 */
-			
+
 			for (int j = 0; j < firstLine.length; j++) {
 				if (firstLine[j].equals("zip_code")) {
 					zipCodeColumn = j;
@@ -62,30 +54,30 @@ public class ReadProperties {
 					marketValueColumn = j;
 				}
 			}
-			
+
 
 			/*
 			 * If Option 4, store relevant livable areas for separate processing
 			 */
-			
-			
+
+
 			/*
 			 * @Cayde I put if statement for which question it was which info would be read,
 			 * probably better in the strategy design pattern
 			 */
-			
+
 			if (selectedOption == 4) {
 				zip.households = 0;
 				while((nextLine = reader.readLine()) != null) {  
 					String[] line = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
-			
-			/*
-			 * First checks zipcode has 5 characters before getting substring
-			 * and compares substring to inputted zipcode		
-			 */
+
+					/*
+					 * First checks zipcode has 5 characters before getting substring
+					 * and compares substring to inputted zipcode		
+					 */
 
 					if ((line[zipCodeColumn].length() > 5) && 
-						((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
+							((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
 						if (isNumeric(line[livableAreaColumn])) {
 							livableArea = (int) Double.parseDouble(line[livableAreaColumn]);
 							zip.livableArea.add(livableArea);
@@ -95,17 +87,17 @@ public class ReadProperties {
 				} 
 
 			}
-			
+
 			/*
 			 * If Option 3,5,or 6 store relevant market values for separate processing
 			 */
-			
+
 			else if ((selectedOption == 3) || (selectedOption > 4)) {
 				zip.households = 0;
 				while((nextLine = reader.readLine()) != null) {  
 					String[] line = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
 					if ((line[zipCodeColumn].length() > 5) && 
-						((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
+							((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
 						if (isNumeric(line[marketValueColumn])) {
 							marketValue = (int) Double.parseDouble(line[marketValueColumn]);
 
@@ -127,17 +119,17 @@ public class ReadProperties {
 
 
 	}
-	
+
 	/*
 	 * Simple helper method to check if value is numeric
 	 */
-	
+
 	public boolean isNumeric(String str) { 
-		  try {  
-		    Double.parseDouble(str);  
-		    return true;
-		  } catch(NumberFormatException e){  
-		    return false;  
-		  }  
+		try {  
+			Double.parseDouble(str);  
+			return true;
+		} catch(NumberFormatException e){  
+			return false;  
+		}  
 	}
 }

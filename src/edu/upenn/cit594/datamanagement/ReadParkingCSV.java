@@ -34,10 +34,7 @@ public class ReadParkingCSV {
 			 * If text file does not exist or can not be read
 			 */
 
-			if ((parkingList.canRead()) && (parkingList.exists()) == false) {
-				System.out.println("Error text file does not exist or can not be read");
-				System.exit(0);
-			}
+
 
 			Logging logger = Logging.getInstance();
 			String currentTime = logger.getCurrentTime();

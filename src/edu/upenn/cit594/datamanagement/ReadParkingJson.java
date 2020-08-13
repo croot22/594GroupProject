@@ -26,14 +26,6 @@ public class ReadParkingJson {
 		
 		File parkingList = new File(parkingFileName);
 		
-		/*
-		 * If JSON file does not exist or can't be read
-		 */
-		
-		if ((parkingList.canRead()) && (parkingList.exists()) == false) {
-			System.out.println("Error JSON file does not exist or can not be read");
-			System.exit(0);
-		}
 		
 		Logging logger = Logging.getInstance();
 		String currentTime = logger.getCurrentTime();
