@@ -5,6 +5,9 @@ import edu.upenn.cit594.data.ZipCodeData;
 
 public class AverageLivableAreaProcessor implements AverageProcessor{
 	
+	/*
+	 * method to get average for livable area
+	 */
 	@Override
 	public double getAverage(String fileName, int zip) {
 		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);

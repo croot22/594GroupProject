@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 public class ZipCodeData {
 	
+	//data to be memoized for each zipcode
 	public int zipCode = 0;
 	public int population = 0;
 	public LinkedList<Integer> fines = new LinkedList<Integer>();
