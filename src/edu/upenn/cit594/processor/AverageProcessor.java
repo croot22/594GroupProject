@@ -6,5 +6,5 @@ public interface AverageProcessor {
 
 	ReadProperties rp = new ReadProperties();
 	ZipCodeProcessor zipProcessor = new ZipCodeProcessor();
-	public double getAverage(String fileName, int zip);
+	public double getAverage(String fileName, int zip, int selectedOption);
 }

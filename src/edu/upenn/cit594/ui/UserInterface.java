@@ -99,7 +99,6 @@ public class UserInterface {
 			System.out.println("The zipcode input is not in the correct 5 digit format.");
 			System.exit(0);
 		}
-		scanner.close();
 		return zip;
 	}
 

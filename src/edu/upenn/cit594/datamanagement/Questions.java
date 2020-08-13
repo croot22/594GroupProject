@@ -92,21 +92,24 @@ public class Questions {
 
 	public void q3AverageMarketValue(String propertiesFileName, int zip) {
 		AverageMarketValueProcessor amvp = new AverageMarketValueProcessor();
-		double averageMarketValue = amvp.getAverage(propertiesFileName, zip);
+		double averageMarketValue = amvp.getAverage(propertiesFileName, zip, 3);
 		System.out.println("Average Market value for " + zip + " is " + 
 				Math.round(averageMarketValue));
 	}
 
 	public void q4AverageLivableArea(String propertiesFileName, int zip) {
 		AverageLivableAreaProcessor alap = new AverageLivableAreaProcessor();
-		double averageLivableArea = alap.getAverage(propertiesFileName, zip);
+		double averageLivableArea = alap.getAverage(propertiesFileName, zip, 4);
 		System.out.println("Average livable area for " + zip + " is " + 
 				Math.round(averageLivableArea));
 	}
 
 	public void q5TotalMarketValuePerCapita(String propertiesFileName, 
 			String populationFileName, int zip) {
-		zipData = OverallData.zipCodeMap.get(zip);
+		if(OverallData.zipCodeMap.containsKey(zip)) {
+			zipData = OverallData.zipCodeMap.get(zip);
+		}
+		
 
 		if (zipData.marketValuePerCapita == 0) {
 			if (zipData.totalMarketValue == 0) {

@@ -9,10 +9,10 @@ public class AverageMarketValueProcessor implements AverageProcessor{
 	 * method to calculate average for market value
 	 */
 	@Override
-	public double getAverage(String fileName, int zip) {
+	public double getAverage(String fileName, int zip, int selectedOption) {
 		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
 		if(zipData == null) {
-			rp.readProperties(5, fileName, zip);
+			rp.readProperties(selectedOption, fileName, zip);
 			zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
 			zipData.averageMarketValue = zipProcessor.averageValue(zipData.totalMarketValue, 
 					zipData.households);
@@ -20,7 +20,7 @@ public class AverageMarketValueProcessor implements AverageProcessor{
 		if (zipData.averageMarketValue == 0) {
 			if (zipData.totalMarketValue == 0) {
 				if (zipData.marketValue == null) {
-					rp.readProperties(5, fileName, zip);
+					rp.readProperties(selectedOption, fileName, zip);
 				}	
 				zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
 			}

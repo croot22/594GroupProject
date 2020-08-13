@@ -37,7 +37,11 @@ public class ReadProperties {
 			String firstLine[] = firstLineRow.split(",");
 			int zipCodeColumn = 0, livableAreaColumn = 0, marketValueColumn = 0;
 			int marketValue = 0, livableArea = 0;
-			ZipCodeData zip = OverallData.zipCodeMap.get(zipCode);
+			ZipCodeData zip = new ZipCodeData();
+			if(OverallData.zipCodeMap.containsKey(zipCode)) {
+				zip = OverallData.zipCodeMap.get(zipCode);
+			}
+
 
 			/*
 			 * Identify columns with relevant variables
@@ -60,11 +64,6 @@ public class ReadProperties {
 			 * If Option 4, store relevant livable areas for separate processing
 			 */
 
-
-			/*
-			 * @Cayde I put if statement for which question it was which info would be read,
-			 * probably better in the strategy design pattern
-			 */
 
 			if (selectedOption == 4) {
 				zip.households = 0;
