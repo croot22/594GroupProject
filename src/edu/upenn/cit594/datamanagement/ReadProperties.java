@@ -94,8 +94,9 @@ public class ReadProperties {
 			else if ((selectedOption == 3) || (selectedOption > 4)) {
 				zip.households = 0;
 				while((nextLine = reader.readLine()) != null) {  
+					
 					String[] line = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
-					if ((line[zipCodeColumn].length() > 5) && 
+					if ((line[zipCodeColumn].length() >= 5) && 
 							((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
 						if (isNumeric(line[marketValueColumn])) {
 							marketValue = (int) Double.parseDouble(line[marketValueColumn]);
