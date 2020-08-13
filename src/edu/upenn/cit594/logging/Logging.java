@@ -26,11 +26,9 @@ public class Logging {
 			ArgumentsProcessor am = new ArgumentsProcessor();
 			if (!am.checkValidFile(fileName)) {
 				logFile.createNewFile();
-				out = new PrintWriter(logFile);
+
 			}
-			else {
-				
-			}
+			out = new PrintWriter(logFile);
 			
 		} catch (FileNotFoundException e) {
 
