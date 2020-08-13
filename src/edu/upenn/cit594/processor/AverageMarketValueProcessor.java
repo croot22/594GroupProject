@@ -5,7 +5,9 @@ import edu.upenn.cit594.data.ZipCodeData;
 
 public class AverageMarketValueProcessor implements AverageProcessor{
 
-	
+	/*
+	 * method to calculate average for market value
+	 */
 	@Override
 	public double getAverage(String fileName, int zip) {
 		ZipCodeData zipData = OverallData.zipCodeMap.get(zip);

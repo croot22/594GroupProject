@@ -72,7 +72,9 @@ public class Questions {
 			}
 		}
 	}
-
+	/*
+	 * helper method to read and store total population
+	 */
 	private void totalPop(String populationFileName) {
 
 		rpf.readPopulationFile(populationFileName);

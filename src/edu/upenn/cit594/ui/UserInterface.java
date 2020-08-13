@@ -31,6 +31,9 @@ public class UserInterface {
 		Scanner scanner = new Scanner(System.in);
 
 		Integer selectedOption = -1;
+		/*
+		 * get selected option from user
+		 */
 		try {
 			selectedOption = scanner.nextInt();
 		} catch(InputMismatchException e) {
@@ -38,7 +41,9 @@ public class UserInterface {
 			System.exit(0);
 		}
 		
-		
+		/*
+		 * error check for inputs ouside of range
+		 */
 		if (selectedOption > 6 || selectedOption < 0) {
 			System.out.println("Selected option is outside of range (0-6).");
 			System.exit(0);
