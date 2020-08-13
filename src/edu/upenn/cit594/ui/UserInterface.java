@@ -17,63 +17,68 @@ public class UserInterface {
 		 * Initial screen
 		 */
 
-		System.out.println("Would you like to play a game?");
-		System.out.println("0: Exit");
-		System.out.println("1: Total Population for all zipcodes");
-		System.out.println("2: Total Parking fines per capita for each zipcode");
-		System.out.println("3: Average market value for a specified zipcode");
-		System.out.println("4: Average total livable area for a specified zipcode");
-		System.out.println("5: Average total residential market value per capita for "
-				+ "a specified zipcode");
-		System.out.println("6: Custom! Ratio of average total residential market value "
-				+ "per capita to average fine per capita");
+			System.out.println("Would you like to play a game?");
+			System.out.println("0: Exit");
+			System.out.println("1: Total Population for all zipcodes");
+			System.out.println("2: Total Parking fines per capita for each zipcode");
+			System.out.println("3: Average market value for a specified zipcode");
+			System.out.println("4: Average total livable area for a specified zipcode");
+			System.out.println("5: Average total residential market value per capita for "
+					+ "a specified zipcode");
+			System.out.println("6: Custom! Ratio of average total residential market value "
+					+ "per capita to average fine per capita");
 
-		scanner = new Scanner(System.in);
-		int selectedOption = -1;
-		Questions question = new Questions();
-		
-		try {
-			selectedOption = scanner.nextInt();
-			if (selectedOption > 6 || selectedOption < 0) {
-				System.out.println("Number input is outside of range (0-6).");
+			Scanner scanner = new Scanner(System.in);
+			int selectedOption = -1;
+			Questions question = new Questions();
+
+			try {
+				if (scanner.hasNext()) {
+					selectedOption = scanner.nextInt();
+				}
+				if (selectedOption > 6 || selectedOption < 0) {
+					System.out.println("Inputted option is outside of range (0-6).");
+					System.exit(0);
+				}
+			} catch(InputMismatchException e) {
+				System.out.println("Please input a number corresponding to one of the options.");
+			}
+
+
+			//Select the method corresponding to the selection
+			if(selectedOption == 0) {
 				System.exit(0);
 			}
-		} catch(InputMismatchException e) {
-			System.out.println("Please input a number corresponding to one of the options.");
-		}
+			else if (selectedOption == 1) {
+				question.q1TotalPopulation(Main.populationFileName);
+			}
+			else if (selectedOption == 2) {
+				question.q2TotalFinesPerCapita(Main.fileType, Main.parkingFileName, 
+						Main.populationFileName);
+			}
+			else if (selectedOption == 3) {
+				int zip = getZipCode();
+				question.q3AverageMarketValue(Main.propertiesFileName, zip);
+			}
+			else if (selectedOption == 4) {
+				int zip = getZipCode();
+				question.q4AverageLivableArea(Main.propertiesFileName, zip);
+			}
+			else if(selectedOption == 5) {
+				int zip = getZipCode();
+				question.q5TotalMarketValuePerCapita(Main.propertiesFileName, 
+						Main.populationFileName, zip);
+			}
+			else {
+				int zip = getZipCode();
+				question.q6TotalMarketValuePerTotalFinesPerCapita(Main.fileType, Main.propertiesFileName, 
+						Main.populationFileName, Main.parkingFileName, zip);
+			}
+			scanner.close();
+		
+			start();
+			
 
-
-		//Select the method corresponding to the selection
-		if(selectedOption == 0) {
-			System.exit(0);
-		}
-		else if (selectedOption == 1) {
-			question.q1TotalPopulation(Main.populationFileName);
-		}
-		else if (selectedOption == 2) {
-			question.q2TotalFinesPerCapita(Main.fileType, Main.parkingFileName, 
-					Main.populationFileName);
-		}
-		else if (selectedOption == 3) {
-			int zip = getZipCode();
-			question.q3AverageMarketValue(Main.propertiesFileName, zip);
-		}
-		else if (selectedOption == 4) {
-			int zip = getZipCode();
-			question.q4AverageLivableArea(Main.propertiesFileName, zip);
-		}
-		else if(selectedOption == 5) {
-			int zip = getZipCode();
-			question.q5TotalMarketValuePerCapita(Main.propertiesFileName, 
-					Main.populationFileName, zip);
-		}
-		else {
-			int zip = getZipCode();
-			question.q6TotalMarketValuePerTotalFinesPerCapita(Main.fileType, Main.propertiesFileName, 
-					Main.populationFileName, Main.parkingFileName, zip);
-		}
-		scanner.close();
-		start();
 	}
 
 	/*
