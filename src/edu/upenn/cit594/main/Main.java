@@ -32,6 +32,9 @@ public class Main {
 		ArgumentsProcessor am = new ArgumentsProcessor();
 		am.checkValidType(Main.fileType);
 		
+		/*
+		 * error check to make sure files exist and can be opened
+		 */
 		if (!am.checkValidFile(Main.parkingFileName) || !am.checkValidFile(Main.propertiesFileName) || 
 				!am.checkValidFile(Main.populationFileName)) {
 			System.out.println("Error JSON file does not exist or can not be read");
