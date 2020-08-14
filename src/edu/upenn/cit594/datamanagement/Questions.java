@@ -50,6 +50,7 @@ public class Questions {
 
 				zipData = OverallData.zipCodeMap.get(zipCode);
 				zipData.totalFines = zipProcessor.fineTotal(zipCode);
+				OverallData.zipCodeMap.put(zipCode, zipData);
 				
 			}
 			OverallData.totalFinesStored = true;
@@ -61,6 +62,7 @@ public class Questions {
 				zipData.totalFinesPerCapita = zipProcessor.averageFinePerCapita(zipCode);
 				System.out.println(zipCode + " $" + 
 						decForm.format(zipData.totalFinesPerCapita));
+				OverallData.zipCodeMap.put(zipCode, zipData);
 			}
 			OverallData.averageFinesPerCapitaStored = true;
 		}

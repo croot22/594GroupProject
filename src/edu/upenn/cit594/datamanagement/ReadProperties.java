@@ -81,10 +81,11 @@ public class ReadProperties {
 							livableArea = (int) Double.parseDouble(line[livableAreaColumn]);
 							zip.livableArea.add(livableArea);
 							zip.households += 1;
+							
 						}
 					} 
 				} 
-
+				OverallData.zipCodeMap.put(zipCode, zip);
 			}
 
 			/*
@@ -106,7 +107,7 @@ public class ReadProperties {
 						}
 					}
 				}
-
+				OverallData.zipCodeMap.put(zipCode, zip);
 			}	
 			reader.close();
 		} catch (FileNotFoundException e) {
