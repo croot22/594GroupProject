@@ -6,11 +6,11 @@ public class ZipCodeData {
 	
 	//data to be memoized for each zipcode
 	public int zipCode = 0;
-	public int population = 0;
+	public double population = 0;
 	public LinkedList<Integer> fines = new LinkedList<Integer>();
 	public LinkedList<Integer> livableArea = new LinkedList<Integer>();
 	public LinkedList<Integer> marketValue = new LinkedList<Integer>();
-	public int totalFines = 0;
+	public double totalFines = 0;
 	public double totalFinesPerCapita = 0;
 	public double totalMarketValue = 0;
 	public double averageMarketValue = 0;

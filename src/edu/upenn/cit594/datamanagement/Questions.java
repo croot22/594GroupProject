@@ -49,9 +49,11 @@ public class Questions {
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 
 				zipData = OverallData.zipCodeMap.get(zipCode);
-				zipData.totalFines = zipProcessor.fineTotal(zipCode);
-				OverallData.zipCodeMap.put(zipCode, zipData);
-				
+				if (!zipData.fines.isEmpty()) {
+					zipData.totalFines = zipProcessor.fineTotal(zipCode);
+					OverallData.zipCodeMap.put(zipCode, zipData);
+				}
+
 			}
 			OverallData.totalFinesStored = true;
 		}
@@ -59,9 +61,13 @@ public class Questions {
 
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 				zipData = OverallData.zipCodeMap.get(zipCode);
-				zipData.totalFinesPerCapita = zipProcessor.averageFinePerCapita(zipCode);
-				System.out.println(zipCode + " $" + 
-						decForm.format(zipData.totalFinesPerCapita));
+				if (zipData.totalFines >= .01 && zipData.population != 0) {
+					zipData.totalFinesPerCapita = zipProcessor.averageFinePerCapita(zipCode);
+					System.out.println(zipCode + " $" + 
+							decForm.format(zipData.totalFinesPerCapita));
+				}
+
+
 				OverallData.zipCodeMap.put(zipCode, zipData);
 			}
 			OverallData.averageFinesPerCapitaStored = true;
@@ -69,8 +75,10 @@ public class Questions {
 		else {
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 				zipData = OverallData.zipCodeMap.get(zipCode);
-				System.out.println(zipCode + " $" + 
-						decForm.format(zipData.totalFinesPerCapita));
+				if (zipData.totalFinesPerCapita >= .01) {
+					System.out.println(zipCode + " $" + 
+							decForm.format(zipData.totalFinesPerCapita));
+				}
 			}
 		}
 	}
@@ -111,7 +119,7 @@ public class Questions {
 		if(OverallData.zipCodeMap.containsKey(zip)) {
 			zipData = OverallData.zipCodeMap.get(zip);
 		}
-		
+
 
 		if (zipData.marketValuePerCapita == 0) {
 			if (zipData.totalMarketValue == 0) {
@@ -136,7 +144,7 @@ public class Questions {
 			String propertiesFileName, String populationFileName, String parkingFileName, int zip) {
 		zipData = OverallData.zipCodeMap.get(zip);
 		DecimalFormat decForm = new DecimalFormat("##.##");
-		
+
 		if (zipData.marketValuePerFinePerCapita == 0) {
 			if (zipData.totalMarketValue == 0) {
 				if (zipData.marketValue == null) {
@@ -160,7 +168,7 @@ public class Questions {
 
 						zipData = OverallData.zipCodeMap.get(zipCode);
 						zipData.totalFines = zipProcessor.fineTotal(zipCode);
-						
+
 					}
 					OverallData.totalFinesStored = true;
 				}
@@ -172,7 +180,7 @@ public class Questions {
 				}
 				OverallData.averageFinesPerCapitaStored = true;
 			}
-			
+
 			zipData.marketValuePerFinePerCapita = zipProcessor.marketValuePerFinesPerCapita(zip);
 
 		}

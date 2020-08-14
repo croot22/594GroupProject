@@ -31,7 +31,7 @@ public class ZipCodeProcessor {
 	}
 
 	public double averageFinePerCapita(int zip) {
-		int avgFine = 0;
+		double avgFine = 0;
 
 		zipData = OverallData.zipCodeMap.get(zip);
 		avgFine = zipData.totalFines / zipData.population;
