@@ -60,7 +60,9 @@ public class ReadParkingJson {
 					zipData = OverallData.zipCodeMap.get(zipCode);
 				}
 				zipData.fines.add(fine);
+				OverallData.zipCodeMap.put(zipCode, zipData);
 			} 
+			
 		}
 
 	} 
