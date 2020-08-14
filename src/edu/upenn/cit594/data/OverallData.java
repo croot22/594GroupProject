@@ -1,6 +1,7 @@
 package edu.upenn.cit594.data;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class OverallData {
 	
@@ -22,5 +23,5 @@ public class OverallData {
 
 	
 	//HashMap to hold and memoize zipcode and related data
-	public static HashMap<Integer, ZipCodeData> zipCodeMap = new HashMap<Integer, ZipCodeData>();
+	public static TreeMap<Integer, ZipCodeData> zipCodeMap = new TreeMap<Integer, ZipCodeData>();
 }
