@@ -74,10 +74,10 @@ public class Questions {
 		}
 		else {
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
-				zipData = OverallData.zipCodeMap.get(zipCode);
-				if (zipData.totalFinesPerCapita >= .01) {
+				OverallData.finesMap.put(zipCode, zipProcessor.averageFinePerCapita(zipCode));
+				if (OverallData.finesMap.get(zipCode) >= .01) {
 					System.out.println(zipCode + " $" + 
-							decForm.format(zipData.totalFinesPerCapita));
+							decForm.format(OverallData.finesMap.get(zipCode)));
 				}
 			}
 		}
