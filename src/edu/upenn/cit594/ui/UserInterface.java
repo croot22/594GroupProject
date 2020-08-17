@@ -23,7 +23,7 @@ public class UserInterface {
 		System.out.println("2: Total Parking fines per capita for each zipcode");
 		System.out.println("3: Average market value for a specified zipcode");
 		System.out.println("4: Average total livable area for a specified zipcode");
-		System.out.println("5: Average total residential market value per capita for "
+		System.out.println("5: Total residential market value per capita for "
 				+ "a specified zipcode");
 		System.out.println("6: Custom! Ratio of average total residential market value "
 				+ "per capita to average fine per capita");

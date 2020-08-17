@@ -47,19 +47,19 @@ public class ReadParkingCSV {
 				if (dataValue.length == 7) {
 					int fine = Integer.parseInt(dataValue[1]);
 					int zipCode = Integer.parseInt(dataValue[6]);
-					ZipCodeData zipCodeData = new ZipCodeData();
+					ZipCodeData zipData = new ZipCodeData();
 					//checking static map to see if zipcode is already memoized
 					if(OverallData.zipCodeMap.containsKey(zipCode)) {
-						zipCodeData = OverallData.zipCodeMap.get(zipCode);
+						zipData = OverallData.zipCodeMap.get(zipCode);
 						
 					}
 					else {
-						 zipCodeData.zipCode = zipCode;
+						 zipData.zipCode = zipCode;
 						 
 					}
 					
-					zipCodeData.fines.add(fine);
-					OverallData.zipCodeMap.put(zipCode, zipCodeData);
+					zipData.fines.add(fine);
+					OverallData.zipCodeMap.put(zipCode, zipData);
 							
 				}    
 			}	
