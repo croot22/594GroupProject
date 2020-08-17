@@ -62,9 +62,9 @@ public class Questions {
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 				zipData = OverallData.zipCodeMap.get(zipCode);
 				if (zipData.totalFines >= .01 && zipData.population != 0) {
-					zipData.totalFinesPerCapita = zipProcessor.averageFinePerCapita(zipCode);
+					OverallData.finesMap.put(zipCode, zipProcessor.averageFinePerCapita(zipCode));
 					System.out.println(zipCode + " $" + 
-							decForm.format(zipData.totalFinesPerCapita));
+							decForm.format(OverallData.finesMap.get(zipCode)));
 				}
 
 

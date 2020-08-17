@@ -23,5 +23,7 @@ public class OverallData {
 
 	
 	//HashMap to hold and memoize zipcode and related data
-	public static TreeMap<Integer, ZipCodeData> zipCodeMap = new TreeMap<Integer, ZipCodeData>();
+	public static HashMap<Integer, ZipCodeData> zipCodeMap = new HashMap<Integer, ZipCodeData>();
+	
+	public static TreeMap<Integer, Double> finesMap = new TreeMap<Integer, Double>();
 }
