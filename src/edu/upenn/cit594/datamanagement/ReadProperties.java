@@ -97,6 +97,7 @@ public class ReadProperties {
 				while((nextLine = reader.readLine()) != null) {  
 					
 					String[] line = nextLine.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");  //specialized tokenizer
+										
 					if ((line[zipCodeColumn].length() >= 5) && 
 							((int) Double.parseDouble (line[zipCodeColumn].substring(0,5)) == zipCode)) {
 						if (isNumeric(line[marketValueColumn])) {

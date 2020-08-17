@@ -18,6 +18,7 @@ public class AverageMarketValueProcessor implements AverageProcessor{
 			if (zipData.totalMarketValue == 0) {
 				if (zipData.marketValue.isEmpty()) {
 					rp.readProperties(selectedOption, fileName, zip);
+					zipData = OverallData.zipCodeMap.get(zip);
 				}	
 				zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
 			}

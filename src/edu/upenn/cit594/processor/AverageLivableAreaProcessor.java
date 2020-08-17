@@ -18,15 +18,16 @@ public class AverageLivableAreaProcessor implements AverageProcessor{
 			if (zipData.totalLivableArea == 0) {
 				if (zipData.livableArea.isEmpty()) {
 					rp.readProperties(selectedOption, fileName, zip);
+					zipData = OverallData.zipCodeMap.get(zip);
 				}	
-				zipData.totalLivableArea = zipProcessor.totalMarketValue(zip);
+				zipData.totalLivableArea = zipProcessor.totalLivableAreas(zip);
 			}
 
 			zipData.averageLivableArea = zipProcessor.averageValue(zipData.totalLivableArea, 
 					zipData.households);
 		}
 
-		return zipData.averageMarketValue;
+		return zipData.averageLivableArea;
 	}
 
 }
