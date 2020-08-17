@@ -137,6 +137,7 @@ public class Questions {
 				totalPop(populationFileName);
 			}
 			zipData.marketValuePerCapita = zipProcessor.marketValuePerCapita(zip);
+			OverallData.zipCodeMap.put(zip, zipData);
 
 		}
 		System.out.println("Total Market Value per Capita for " + zip + " is " + 
@@ -154,29 +155,34 @@ public class Questions {
 		DecimalFormat decForm = new DecimalFormat("##.##");
 
 		if (zipData.marketValuePerFinePerCapita == 0) {
-			if (zipData.totalMarketValue == 0) {
-				if (zipData.marketValue.isEmpty()) {
-					rp.readProperties(6, propertiesFileName, zip);
+			if (zipData.marketValuePerCapita == 0) {
+				if (zipData.totalMarketValue == 0) {
+					if (zipData.marketValue.isEmpty()) {
+						rp.readProperties(5, propertiesFileName, zip);
+						zipData = OverallData.zipCodeMap.get(zip);
+					}
+					zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
+
 				}
-				zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
+				if (OverallData.totalPopulation == 0) {
+					totalPop(populationFileName);
+				}
+				zipData.marketValuePerCapita = zipProcessor.marketValuePerCapita(zip);
 				OverallData.zipCodeMap.put(zip, zipData);
-			}
-			if (zipData.population == 0) {
-				totalPop(populationFileName);
 
 			}
+
 			if (OverallData.averageFinesPerCapitaStored == false) {
 				if(OverallData.totalFinesStored == false) {
 					if(OverallData.finesStored == false) {
 						fd.fileDecision(parkingFileType, parkingFileName);
-						zipData = OverallData.zipCodeMap.get(zip);
 					}
-					
+
 					for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 
 						zipData = OverallData.zipCodeMap.get(zipCode);
 						zipData.totalFines = zipProcessor.fineTotal(zipCode);
-
+						OverallData.zipCodeMap.put(zipCode, zipData);
 					}
 					OverallData.totalFinesStored = true;
 				}
@@ -184,15 +190,16 @@ public class Questions {
 				for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 					zipData = OverallData.zipCodeMap.get(zipCode);
 					zipData.totalFinesPerCapita = zipProcessor.averageFinePerCapita(zipCode);
-
+					OverallData.zipCodeMap.put(zipCode, zipData);
 				}
 				OverallData.averageFinesPerCapitaStored = true;
 			}
-
+			zipData = OverallData.zipCodeMap.get(zip);
 			zipData.marketValuePerFinePerCapita = zipProcessor.marketValuePerFinesPerCapita(zip);
+			OverallData.zipCodeMap.put(zip, zipData);
 
 		}
-		System.out.println(Math.round(zipData.marketValuePerFinePerCapita));
+		System.out.println(zipData.marketValuePerFinePerCapita);
 	}
 
 

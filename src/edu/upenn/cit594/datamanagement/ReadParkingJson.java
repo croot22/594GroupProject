@@ -59,6 +59,9 @@ public class ReadParkingJson {
 				if(OverallData.zipCodeMap.containsKey(zipCode)) {
 					zipData = OverallData.zipCodeMap.get(zipCode);
 				}
+				else {
+					zipData.zipCode = zipCode;
+				}
 				zipData.fines.add(fine);
 				OverallData.zipCodeMap.put(zipCode, zipData);
 			} 
