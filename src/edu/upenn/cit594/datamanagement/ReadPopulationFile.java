@@ -36,6 +36,7 @@ public class ReadPopulationFile {
 					int zipCode = Integer.parseInt(dataValue[0]); 			     
 				    int population = Integer.parseInt(dataValue[1]);
 				    ZipCodeData zip = new ZipCodeData();
+				    //check if zipCode object is already memoized, if not, do so
 				    if (OverallData.zipCodeMap.containsKey(zipCode)) {
 				    	zip = OverallData.zipCodeMap.get(zipCode);
 				    }

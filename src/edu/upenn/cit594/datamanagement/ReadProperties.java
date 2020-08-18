@@ -38,6 +38,7 @@ public class ReadProperties {
 			int zipCodeColumn = 0, livableAreaColumn = 0, marketValueColumn = 0;
 			int marketValue = 0, livableArea = 0;
 			ZipCodeData zip = new ZipCodeData();
+			//check if zipcode object is already memoized, if not, do so
 			if(OverallData.zipCodeMap.containsKey(zipCode)) {
 				zip = OverallData.zipCodeMap.get(zipCode);
 			}

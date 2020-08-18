@@ -13,9 +13,17 @@ public class AverageLivableAreaProcessor implements AverageProcessor{
 		if(OverallData.zipCodeMap.containsKey(zip)) {
 			ZipCodeData zipData = OverallData.zipCodeMap.get(zip);
 		}
-
+		/*
+		 * check if average livable area has been calculated, if not, do so and memoize
+		 */
 		if (zipData.averageLivableArea == 0) {
+			/*
+			 * check if total livable area has been calculated, if not, do so and memoize
+			 */
 			if (zipData.totalLivableArea == 0) {
+				/*
+				 * check if list of livable area has been calculated, if not, do so and memoize
+				 */
 				if (zipData.livableArea.isEmpty()) {
 					rp.readProperties(selectedOption, fileName, zip);
 					zipData = OverallData.zipCodeMap.get(zip);
