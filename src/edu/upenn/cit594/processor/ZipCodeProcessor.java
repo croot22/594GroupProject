@@ -95,7 +95,7 @@ public class ZipCodeProcessor {
 		return marketValuePerCapita;
 	}
 	/*
-	 * calcs ration of market value per capita to fines per capita of a specific zipcode
+	 * calcs ratio of market value per capita to fines per capita of a specific zipcode
 	 */
 	public double marketValuePerFinesPerCapita(int zip) {
 		double marketValuePerCapita = marketValuePerCapita(zip);
