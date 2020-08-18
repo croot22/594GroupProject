@@ -33,17 +33,26 @@ public class Questions {
 		DecimalFormat decForm = new DecimalFormat("##.##");
 
 		/*
-		 * If not already stored or memoized, obtain
-		 * Otherwise use stored information
+		 * check if total pop has been calculated, if not, do so and memoize
 		 */
 
 		if (OverallData.totalPopulation == 0) {
 			totalPop(populationFileName);
 		}
+		
+		/*
+		 * check if list of fines for each zip has been read, if not, do so and memoize
+		 */
+		
 		if (OverallData.finesStored == false) {
 			fd.fileDecision(fileType, parkingFileName);
 			OverallData.finesStored = true;
 		}
+		
+		/*
+		 * check if total fines for each zip has been calculated, if not, do so and memoize
+		 */
+		
 		if (OverallData.totalFinesStored == false){
 
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
@@ -57,21 +66,28 @@ public class Questions {
 			}
 			OverallData.totalFinesStored = true;
 		}
+		
+		/*
+		 * check if total fines per capita has been calculated, if not, do so and memoize
+		 */
+		
 		if (OverallData.averageFinesPerCapitaStored == false) {
 
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 				zipData = OverallData.zipCodeMap.get(zipCode);
 				if (zipData.totalFines >= .01 && zipData.population != 0) {
 					OverallData.finesMap.put(zipCode, zipProcessor.averageFinePerCapita(zipCode));
+					//only print if the average is greater than $0
 					if(OverallData.finesMap.get(zipCode) >= .01) {
 						System.out.println(zipCode + " $" + 
 								decForm.format(OverallData.finesMap.get(zipCode)));
 					}
 				}
 
-
+				//memoize
 				OverallData.zipCodeMap.put(zipCode, zipData);
 			}
+			//mark globally that this was memoized
 			OverallData.averageFinesPerCapitaStored = true;
 		}
 		else {
@@ -88,8 +104,8 @@ public class Questions {
 	 * helper method to read and store total population
 	 */
 	private void totalPop(String populationFileName) {
-
 		rpf.readPopulationFile(populationFileName);
+		//memoize
 		OverallData.totalPopulation = zipProcessor.populationTotal();
 	}
 
@@ -118,15 +134,27 @@ public class Questions {
 
 	public void q5TotalMarketValuePerCapita(String propertiesFileName, 
 			String populationFileName, int zip) {
+		/*
+		 * check if zipcode object already exists
+		 */
 		if(OverallData.zipCodeMap.containsKey(zip)) {
 			zipData = OverallData.zipCodeMap.get(zip);
 		}
 		else {
 			zipData.zipCode = zip;
 		}
-
+		
+		/*
+		 * check if market value per capita has been calculated, if not, do so and memoize
+		 */
 		if (zipData.marketValuePerCapita == 0) {
+			/*
+			 * check if total market value for each zip code has been calculated, if not, do so and memoize
+			 */
 			if (zipData.totalMarketValue == 0) {
+				/*
+				 * check if list of market values for each zip has been read, if not, do so and memoize
+				 */
 				if (zipData.marketValue.isEmpty()) {
 
 					rp.readProperties(5, propertiesFileName, zip);
@@ -135,6 +163,9 @@ public class Questions {
 				zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
 
 			}
+			/*
+			 * check if total pop has been calculated, if not, do so and memoize
+			 */
 			if (OverallData.totalPopulation == 0) {
 				totalPop(populationFileName);
 			}
@@ -148,6 +179,9 @@ public class Questions {
 
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, 
 			String propertiesFileName, String populationFileName, String parkingFileName, int zip) {
+		/*
+		 * check if zipcode object already exists
+		 */
 		if(OverallData.zipCodeMap.containsKey(zip)) {
 			zipData = OverallData.zipCodeMap.get(zip);
 		}
@@ -155,10 +189,21 @@ public class Questions {
 			zipData.zipCode = zip;
 		}
 		DecimalFormat decForm = new DecimalFormat("##.##");
-
+		/*
+		 * check if market value per fine per capita has been calculated, if not, do so and memoize
+		 */
 		if (zipData.marketValuePerFinePerCapita == 0) {
+			/*
+			 * check if market value per capita has been calculated, if not, do so and memoize
+			 */
 			if (zipData.marketValuePerCapita == 0) {
+				/*
+				 * check if total market value per each zip has been calculated, if not, do so and memoize
+				 */
 				if (zipData.totalMarketValue == 0) {
+					/*
+					 * check if list of market values per zip has been read, if not, do so and memoize
+					 */
 					if (zipData.marketValue.isEmpty()) {
 						rp.readProperties(5, propertiesFileName, zip);
 						zipData = OverallData.zipCodeMap.get(zip);
@@ -173,9 +218,17 @@ public class Questions {
 				OverallData.zipCodeMap.put(zip, zipData);
 
 			}
-
+			/*
+			 * check if total fines per capita has been calculated, if not, do so and memoize
+			 */
 			if (OverallData.averageFinesPerCapitaStored == false) {
+				/*
+				 * check if total fines per zip has been calculated, if not, do so and memoize
+				 */
 				if(OverallData.totalFinesStored == false) {
+					/*
+					 * check if list of fines per zip has been read, if not, do so and memoize
+					 */
 					if(OverallData.finesStored == false) {
 						fd.fileDecision(parkingFileType, parkingFileName);
 					}
