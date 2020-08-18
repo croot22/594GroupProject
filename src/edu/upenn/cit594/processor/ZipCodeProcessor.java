@@ -100,8 +100,7 @@ public class ZipCodeProcessor {
 	public double marketValuePerFinesPerCapita(int zip) {
 		double marketValuePerCapita = marketValuePerCapita(zip);
 		double finesPerCapita = totalFinePerCapita(zip);
-		double marketValuePerFinesPerCapita = finesPerCapita / marketValuePerCapita; 
-
+		double marketValuePerFinesPerCapita = marketValuePerCapita / finesPerCapita; 
 		return marketValuePerFinesPerCapita;
 	}
 }

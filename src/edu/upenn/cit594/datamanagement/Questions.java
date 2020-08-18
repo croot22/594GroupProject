@@ -179,6 +179,7 @@ public class Questions {
 
 	public void q6TotalMarketValuePerTotalFinesPerCapita(String parkingFileType, 
 			String propertiesFileName, String populationFileName, String parkingFileName, int zip) {
+		DecimalFormat decForm = new DecimalFormat("##.##");
 		/*
 		 * check if zipcode object already exists
 		 */
@@ -188,7 +189,7 @@ public class Questions {
 		else {
 			zipData.zipCode = zip;
 		}
-		DecimalFormat decForm = new DecimalFormat("##.##");
+		
 		/*
 		 * check if market value per fine per capita has been calculated, if not, do so and memoize
 		 */
@@ -205,7 +206,7 @@ public class Questions {
 					 * check if list of market values per zip has been read, if not, do so and memoize
 					 */
 					if (zipData.marketValue.isEmpty()) {
-						rp.readProperties(5, propertiesFileName, zip);
+						rp.readProperties(6, propertiesFileName, zip);
 						zipData = OverallData.zipCodeMap.get(zip);
 					}
 					zipData.totalMarketValue = zipProcessor.totalMarketValue(zip);
@@ -254,7 +255,7 @@ public class Questions {
 			OverallData.zipCodeMap.put(zip, zipData);
 
 		}
-		System.out.println(zipData.marketValuePerFinePerCapita);
+		System.out.println(decForm.format(zipData.marketValuePerFinePerCapita));
 	}
 
 
