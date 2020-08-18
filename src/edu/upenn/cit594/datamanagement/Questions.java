@@ -76,7 +76,7 @@ public class Questions {
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 				zipData = OverallData.zipCodeMap.get(zipCode);
 				if (zipData.totalFines >= .01 && zipData.population != 0) {
-					OverallData.finesMap.put(zipCode, zipProcessor.averageFinePerCapita(zipCode));
+					OverallData.finesMap.put(zipCode, zipProcessor.totalFinePerCapita(zipCode));
 					//only print if the average is greater than $0
 					if(OverallData.finesMap.get(zipCode) >= .01) {
 						System.out.println(zipCode + " $" + 
@@ -92,7 +92,7 @@ public class Questions {
 		}
 		else {
 			for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
-				OverallData.finesMap.put(zipCode, zipProcessor.averageFinePerCapita(zipCode));
+				OverallData.finesMap.put(zipCode, zipProcessor.totalFinePerCapita(zipCode));
 				if (OverallData.finesMap.get(zipCode) >= .01) {
 					System.out.println(zipCode + " $" + 
 							decForm.format(OverallData.finesMap.get(zipCode)));
@@ -244,7 +244,7 @@ public class Questions {
 
 				for (Integer zipCode : OverallData.zipCodeMap.keySet()) {
 					zipData = OverallData.zipCodeMap.get(zipCode);
-					zipData.totalFinesPerCapita = zipProcessor.averageFinePerCapita(zipCode);
+					zipData.totalFinesPerCapita = zipProcessor.totalFinePerCapita(zipCode);
 					OverallData.zipCodeMap.put(zipCode, zipData);
 				}
 				OverallData.averageFinesPerCapitaStored = true;
